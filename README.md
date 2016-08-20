@@ -51,7 +51,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_hhvm]:         https://img.shields.io/hhvm/arcanedev/units.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Units.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/Units.svg?style=flat-square
-[badge_insight]:      https://img.shields.io/sensiolabs/i/[id].svg?style=flat-square
+[badge_insight]:      https://img.shields.io/sensiolabs/i/6034af21-a8e1-4831-9b9d-238670d852fb.svg?style=flat-square
 [badge_issues]:       https://img.shields.io/github/issues/ARCANEDEV/Units.svg?style=flat-square
 [badge_package]:      https://img.shields.io/badge/package-arcanedev/units-blue.svg?style=flat-square
 [badge_release]:      https://img.shields.io/packagist/v/arcanedev/units.svg?style=flat-square
@@ -65,4 +65,4 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-travis]:        https://travis-ci.org/ARCANEDEV/Units
 [link-hhvm]:          http://hhvm.h4cc.de/package/arcanedev/units
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/Units/?branch=master
-[link-insight]:       https://insight.sensiolabs.com/projects/[id]
+[link-insight]:       https://insight.sensiolabs.com/projects/6034af21-a8e1-4831-9b9d-238670d852fb
