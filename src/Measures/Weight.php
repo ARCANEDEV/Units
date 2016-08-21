@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Units\Measures;
 
+use Arcanedev\Units\Traits\Calculatable;
 use Illuminate\Support\Arr;
 use InvalidArgumentException;
 use Arcanedev\Units\Contracts\Weight as WeightContract;
@@ -12,6 +13,12 @@ use Arcanedev\Units\Contracts\Weight as WeightContract;
  */
 class Weight implements WeightContract
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Traits
+     | ------------------------------------------------------------------------------------------------
+     */
+    use Calculatable;
+
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
@@ -76,8 +83,8 @@ class Weight implements WeightContract
         $this->setSymbols(Arr::get($options, 'symbols', []));
         $this->setFormat(
             Arr::get($options, 'decimals', 0),
-            Arr::get($options, 'separators.decimal', '.'),
-            Arr::get($options, 'separators.thousands', ',')
+            Arr::get($options, 'separators.decimal', ','),
+            Arr::get($options, 'separators.thousands', '.')
         );
     }
 
@@ -386,9 +393,11 @@ class Weight implements WeightContract
      */
     public function add(WeightContract $weight)
     {
-        $value = $weight->to($this->unit())->value();
-
-        return $this->calculate('+', $value);
+        return $this->setValue(
+            static::calculate(
+                $this->value(), '+', $weight->to($this->unit())->value()
+            )
+        );
     }
 
     /**
@@ -402,7 +411,7 @@ class Weight implements WeightContract
     public function subWeight($value, $unit = self::KG)
     {
         return $this->sub(
-            self::make($value, $unit)
+            static::make($value, $unit)
         );
     }
 
@@ -415,9 +424,11 @@ class Weight implements WeightContract
      */
     public function sub(WeightContract $weight)
     {
-        $value = $weight->to($this->unit())->value();
-
-        return $this->calculate('-', $value);
+        return $this->setValue(
+            static::calculate(
+                $this->value(), '-', $weight->to($this->unit())->value()
+            )
+        );
     }
 
     /**
@@ -429,7 +440,9 @@ class Weight implements WeightContract
      */
     public function multiply($number)
     {
-        return $this->calculate('x', $number);
+        return $this->setValue(
+            static::calculate($this->value(), 'x', $number)
+        );
     }
 
     /**
@@ -441,42 +454,9 @@ class Weight implements WeightContract
      */
     public function divide($number)
     {
-        return $this->calculate('/', $number);
-    }
-
-    /**
-     * Calculate the value.
-     *
-     * @param  string                $operator
-     * @param  integer|double|float  $value
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    protected function calculate($operator, $value)
-    {
-        switch ($operator) {
-            case '+':
-                $this->setValue($this->value() + $value);
-                break;
-
-            case '-':
-                $this->setValue($this->value() - $value);
-                break;
-
-            case 'x':
-                $this->setValue($this->value() * $value);
-                break;
-
-            case '/':
-                $this->setValue($this->value() / $value);
-                break;
-
-            default:
-                // Or throw an error
-                break;
-        }
-
-        return $this;
+        return $this->setValue(
+            static::calculate($this->value(), '/', $number)
+        );
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -518,7 +498,7 @@ class Weight implements WeightContract
         ];
 
         return array_map(function ($ratio) {
-            return pow(1000, $ratio);
+            return static::calculate(1000, '^', $ratio);
         }, $ratios);
     }
 

@@ -131,4 +131,180 @@ class WeightTest extends TestCase
         $this->assertSame($this->weight->unit(),  $converted->unit());
         $this->assertSame($this->weight->value(), $converted->value());
     }
+
+    /** @test */
+    public function it_can_format()
+    {
+        $this->assertSame('0', $this->weight->format());
+
+        $this->weight->setValue(1234.567);
+
+        $this->assertSame('1.235', $this->weight->format());
+        $this->assertSame('1.234,567', $this->weight->format(3));
+    }
+
+    /** @test */
+    public function it_can_format_with_symbol()
+    {
+        $this->assertSame('0 kg', $this->weight->formatWithSymbol());
+
+        $this->weight->setValue(1234.567);
+
+        $this->assertSame('1.235 kg',     $this->weight->formatWithSymbol());
+        $this->assertSame('1.234,567 kg', $this->weight->formatWithSymbol(3));
+    }
+
+    /** @test */
+    public function it_can_format_with_symbol_when_it_casts_to_string()
+    {
+        $this->assertSame('0 kg', (string) $this->weight);
+
+        $this->weight->setValue(1234.567);
+
+        $this->assertSame('1.235 kg', (string) $this->weight);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Calculation Tests
+     | ------------------------------------------------------------------------------------------------
+     */
+    /** @test */
+    public function it_can_add()
+    {
+        $total  = 0;
+        $values = [1, 10, 100, 1000, 0.1, 0.01];
+
+        foreach ($values as $value) {
+            $this->weight->addWeight($value);
+            $total += $value;
+
+            $this->assertSame($total, $this->weight->value());
+        }
+    }
+
+    /** @test */
+    public function it_can_add_negative_value()
+    {
+        $this->weight->addWeight(-1);
+
+        $this->assertSame(-1, $this->weight->value());
+    }
+
+    /** @test */
+    public function it_can_add_another_weight_object()
+    {
+        $total  = 0;
+        $values = [1, 10, 100, 1000, 0.1, 0.01];
+
+        foreach ($values as $value) {
+            $w = Weight::make($value);
+
+            $this->weight->add($w);
+
+            $total += $w->value();
+
+            $this->assertSame($total, $this->weight->value());
+        }
+    }
+
+    /** @test */
+    public function it_can_add_another_weight_object_with_different_unit()
+    {
+        $w = Weight::make(1, Weight::TON);
+
+        $this->weight->add($w);
+
+        $this->assertSame(1000, $this->weight->value());
+    }
+
+    /** @test */
+    public function it_can_subtract()
+    {
+        $this->weight->subWeight(1);
+
+        $this->assertSame(-1, $this->weight->value());
+
+        $this->weight->subWeight(99);
+
+        $this->assertSame(-100, $this->weight->value());
+    }
+
+    /** @test */
+    public function it_can_subtract_with_negative_value()
+    {
+        $this->weight->subWeight(-1);
+
+        $this->assertSame(1, $this->weight->value());
+
+        $this->weight->subWeight(-99);
+
+        $this->assertSame(100, $this->weight->value());
+    }
+
+    /** @test */
+    public function it_can_multiply()
+    {
+        $this->weight->setValue(1);
+
+        $total  = 1;
+        $values = range(1, 10);
+
+        foreach ($values as $value) {
+            $this->weight->multiply($value);
+            $total *= $value;
+            $this->assertSame($total, $this->weight->value());
+        }
+    }
+
+    /** @test */
+    public function it_can_multiply_with_negative_value()
+    {
+        $this->weight->setValue(1);
+
+        $total  = 1;
+        $values = range(-10, -1);
+
+        foreach ($values as $value) {
+            $this->weight->multiply($value);
+            $total *= $value;
+            $this->assertSame($total, $this->weight->value());
+        }
+    }
+
+    /** @test */
+    public function it_can_divide()
+    {
+        $this->weight->setValue(1);
+
+        $total  = 1;
+        $values = range(1, 10);
+
+        foreach ($values as $value) {
+            $this->weight->divide($value);
+            $total /= $value;
+            $this->assertSame($total, $this->weight->value());
+        }
+    }
+
+    /**
+     * @test
+     *
+     * @expectedException         \InvalidArgumentException
+     * @expectedExceptionMessage  The weight unit [litre] is invalid.
+     */
+    public function it_must_throw_an_exception_on_invalid_unit()
+    {
+        $this->weight->setUnit('litre');
+    }
+
+    /** @test */
+    public function it_must_throw_divide_by_zero_exception()
+    {
+        try {
+            $this->weight->divide(0);
+        }
+        catch (\Exception $e) {
+            $this->assertEquals('Division by zero', $e->getMessage());
+        }
+    }
 }
