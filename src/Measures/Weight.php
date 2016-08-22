@@ -86,7 +86,7 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return self
      */
     public static function make($value = 0, $unit = self::KG, array $options = [])
     {
@@ -98,7 +98,7 @@ class Weight extends UnitMeasure implements WeightContract
      *
      * @param  string  $to
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return self
      */
     public function to($to)
     {
@@ -133,29 +133,11 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return self
      */
     public function addWeight($value, $unit = self::KG)
     {
-        return $this->add(
-            self::make($value, $unit)
-        );
-    }
-
-    /**
-     * Add the weight instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Weight  $weight
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function add(WeightContract $weight)
-    {
-        return $this->setValue(
-            static::calculate(
-                $this->value(), '+', $weight->to($this->unit())->value()
-            )
-        );
+        return $this->add(self::make($value, $unit));
     }
 
     /**
@@ -164,57 +146,11 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return self
      */
     public function subWeight($value, $unit = self::KG)
     {
-        return $this->sub(
-            static::make($value, $unit)
-        );
-    }
-
-    /**
-     * Sub the weight instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Weight  $weight
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function sub(WeightContract $weight)
-    {
-        return $this->setValue(
-            static::calculate(
-                $this->value(), '-', $weight->to($this->unit())->value()
-            )
-        );
-    }
-
-    /**
-     * Multiply weight by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function multiply($number)
-    {
-        return $this->setValue(
-            static::calculate($this->value(), 'x', $number)
-        );
-    }
-
-    /**
-     * Divide weight by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function divide($number)
-    {
-        return $this->setValue(
-            static::calculate($this->value(), '/', $number)
-        );
+        return $this->sub(static::make($value, $unit));
     }
 
     /* ------------------------------------------------------------------------------------------------

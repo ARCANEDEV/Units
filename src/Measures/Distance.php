@@ -97,7 +97,7 @@ class Distance extends UnitMeasure implements DistanceContract
     }
 
     /**
-     * Convert the weight to the given unit.
+     * Convert the distance to the given unit.
      *
      * @param  string  $to
      *
@@ -113,7 +113,7 @@ class Distance extends UnitMeasure implements DistanceContract
     }
 
     /**
-     * Convert the weight.
+     * Convert the distance.
      *
      * @param  string     $from
      * @param  string     $to
@@ -146,23 +146,7 @@ class Distance extends UnitMeasure implements DistanceContract
     }
 
     /**
-     * Add the distance instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Distance  $distance
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function add(DistanceContract $distance)
-    {
-        return $this->setValue(
-            static::calculate(
-                $this->value(), '+', $distance->to($this->unit())->value()
-            )
-        );
-    }
-
-    /**
-     * Sub the weight.
+     * Sub the distance.
      *
      * @param  float|int  $value
      * @param  string     $unit
@@ -176,61 +160,17 @@ class Distance extends UnitMeasure implements DistanceContract
         );
     }
 
-    /**
-     * Sub the distance instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Distance  $distance
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function sub(DistanceContract $distance)
-    {
-        return $this->setValue(
-            static::calculate(
-                $this->value(), '-', $distance->to($this->unit())->value()
-            )
-        );
-    }
-
-    /**
-     * Multiply distance by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function multiply($number)
-    {
-        return $this->setValue(
-            static::calculate($this->value(), 'x', $number)
-        );
-    }
-
-    /**
-     * Divide distance by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function divide($number)
-    {
-        return $this->setValue(
-            static::calculate($this->value(), '/', $number)
-        );
-    }
-
     /* ------------------------------------------------------------------------------------------------
      |  Other Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the weight convert ratio.
+     * Get the distance convert ratio.
      *
      * @param  string  $to
      * @param  string  $from
      *
-     * @return double|float|integer
+     * @return float|int
      */
     protected static function getRatio($to, $from)
     {
@@ -245,7 +185,7 @@ class Distance extends UnitMeasure implements DistanceContract
     }
 
     /**
-     * Get all the weight ratios.
+     * Get all the distance ratios.
      *
      * @return array
      */
