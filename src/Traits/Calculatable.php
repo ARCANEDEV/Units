@@ -1,5 +1,7 @@
 <?php namespace Arcanedev\Units\Traits;
 
+use Arcanedev\Units\Contracts\UnitMeasure;
+
 /**
  * Trait     Calculatable
  *
@@ -8,6 +10,70 @@
  */
 trait Calculatable
 {
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Add the unit instance.
+     *
+     * @param  \Arcanedev\Units\Contracts\UnitMeasure  $unit
+     *
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
+     */
+    public function add(UnitMeasure $unit)
+    {
+        return $this->setValue(
+            static::calculate(
+                $this->value(), '+', $unit->to($this->unit())->value()
+            )
+        );
+    }
+
+    /**
+     * Sub the unit instance.
+     *
+     * @param  \Arcanedev\Units\Contracts\UnitMeasure  $unit
+     *
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
+     */
+    public function sub(UnitMeasure $unit)
+    {
+        return $this->setValue(
+            static::calculate(
+                $this->value(), '-', $unit->to($this->unit())->value()
+            )
+        );
+    }
+
+    /**
+     * Multiply unit by the given number.
+     *
+     * @param  float|int  $number
+     *
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
+     */
+    public function multiply($number)
+    {
+        return $this->setValue(
+            static::calculate($this->value(), 'x', $number)
+        );
+    }
+
+    /**
+     * Divide unit by the given number.
+     *
+     * @param  float|int  $number
+     *
+     * @return \Arcanedev\Units\Contracts\Weight
+     */
+    public function divide($number)
+    {
+        return $this->setValue(
+            static::calculate($this->value(), '/', $number)
+        );
+    }
+
     /**
      * Calculate the value.
      *
