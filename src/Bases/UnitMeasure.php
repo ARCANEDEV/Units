@@ -1,6 +1,7 @@
 <?php namespace Arcanedev\Units\Bases;
+
+use Arcanedev\Units\Exceptions\InvalidUnitException;
 use Illuminate\Support\Arr;
-use InvalidArgumentException;
 use ReflectionClass;
 
 /**
@@ -271,8 +272,10 @@ abstract class UnitMeasure
     protected static function checkUnit($unit)
     {
         if ( ! in_array($unit, static::units())) {
-            throw new InvalidArgumentException(
-                "The weight unit [{$unit}] is invalid."
+            $class = static::class;
+
+            throw new InvalidUnitException(
+                "Invalid unit of measurement [{$unit}] in $class."
             );
         }
     }
