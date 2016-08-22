@@ -3,6 +3,12 @@
 use Arcanedev\Units\Measures\Weight;
 use Arcanedev\Units\Tests\TestCase;
 
+/**
+ * Class     WeightTest
+ *
+ * @package  Arcanedev\Units\Tests\Measures
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 class WeightTest extends TestCase
 {
     /* ------------------------------------------------------------------------------------------------
@@ -38,6 +44,7 @@ class WeightTest extends TestCase
     public function it_can_be_instantiated()
     {
         $expectations = [
+            \Arcanedev\Units\Bases\UnitMeasure::class,
             \Arcanedev\Units\Contracts\Weight::class,
             \Arcanedev\Units\Measures\Weight::class,
         ];
@@ -162,6 +169,10 @@ class WeightTest extends TestCase
         $this->weight->setValue(1234.567);
 
         $this->assertSame('1.235 kg', (string) $this->weight);
+
+        $this->weight->setValue(-1234.567);
+
+        $this->assertSame('-1.235 kg', (string) $this->weight);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -290,7 +301,7 @@ class WeightTest extends TestCase
      * @test
      *
      * @expectedException         \InvalidArgumentException
-     * @expectedExceptionMessage  The weight unit [litre] is invalid.
+     * @expectedExceptionMessage  Invalid unit of measurement [litre] in Arcanedev\Units\Measures\Weight.
      */
     public function it_must_throw_an_exception_on_invalid_unit()
     {

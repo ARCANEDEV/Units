@@ -130,8 +130,8 @@ class Weight extends UnitMeasure implements WeightContract
     /**
      * Add the weight.
      *
-     * @param  double|float|integer  $value
-     * @param  string                $unit
+     * @param  float|int  $value
+     * @param  string     $unit
      *
      * @return \Arcanedev\Units\Contracts\Weight
      */
@@ -248,6 +248,7 @@ class Weight extends UnitMeasure implements WeightContract
      */
     protected static function getRatios()
     {
+        $rate   = 1000;
         $ratios = [
             static::TON => 0,
             static::KG  => 1,
@@ -255,8 +256,8 @@ class Weight extends UnitMeasure implements WeightContract
             static::MG  => 3,
         ];
 
-        return array_map(function ($ratio) {
-            return static::calculate(1000, '^', $ratio);
+        return array_map(function ($ratio) use ($rate) {
+            return static::calculate($rate, '^', $ratio);
         }, $ratios);
     }
 }

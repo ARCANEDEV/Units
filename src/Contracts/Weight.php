@@ -101,8 +101,8 @@ interface Weight extends UnitMeasure
     /**
      * Add the weight.
      *
-     * @param  double|float|integer  $value
-     * @param  string                $unit
+     * @param  float|int  $value
+     * @param  string     $unit
      *
      * @return \Arcanedev\Units\Contracts\Weight
      */
