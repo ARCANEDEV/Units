@@ -19,24 +19,17 @@ trait Calculatable
      */
     protected static function calculate($a, $operator, $b)
     {
-        switch ($operator) {
-            case '+':
-                return $a + $b;
+        $operations = $operations = [
+            '+' => function ($a, $b) { return $a + $b; },
+            '-' => function ($a, $b) { return $a - $b; },
+            'x' => function ($a, $b) { return $a * $b; },
+            '*' => function ($a, $b) { return $a * $b; },
+            '/' => function ($a, $b) { return $a / $b; },
+            '^' => function ($a, $b) { return pow($a, $b); },
+        ];
 
-            case '-':
-                return $a - $b;
-
-            case 'x':
-            case '*':
-                return $a * $b;
-
-            case '/':
-                return $a / $b;
-
-            case '^':
-                return pow($a, $b);
-        }
-
-        return $a;
+        return array_key_exists($operator, $operations)
+            ? call_user_func_array($operations[$operator], [$a, $b])
+            : $a;
     }
 }
