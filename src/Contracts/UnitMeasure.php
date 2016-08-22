@@ -1,5 +1,11 @@
 <?php namespace Arcanedev\Units\Contracts;
 
+/**
+ * Interface  UnitMeasure
+ *
+ * @package   Arcanedev\Units\Contracts
+ * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
 interface UnitMeasure
 {
     /* ------------------------------------------------------------------------------------------------
@@ -88,4 +94,13 @@ interface UnitMeasure
      * @return static
      */
     public function setFormat($decimals = 0, $decimalSeparator = ',', $thousandsSeparator = '.');
+
+    /**
+     * Convert the unit object to the given unit of measure.
+     *
+     * @param  string  $to
+     *
+     * @return static
+     */
+    public function to($to);
 }

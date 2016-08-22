@@ -6,7 +6,7 @@
  * @package   Arcanedev\Units\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface Distance extends UnitMeasure
+interface Distance extends UnitMeasure, Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
@@ -56,15 +56,6 @@ interface Distance extends UnitMeasure
     public static function make($value = 0, $unit = self::M, array $options = []);
 
     /**
-     * Convert the distance to the given unit.
-     *
-     * @param  string  $to
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function to($to);
-
-    /**
      * Convert the distance.
      *
      * @param  string                $from
@@ -112,15 +103,6 @@ interface Distance extends UnitMeasure
     public function addDistance($value, $unit = self::M);
 
     /**
-     * Add the distance instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Distance  $distance
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function add(self $distance);
-
-    /**
      * Sub the distance.
      *
      * @param  float|int  $value
@@ -129,31 +111,4 @@ interface Distance extends UnitMeasure
      * @return \Arcanedev\Units\Contracts\Distance
      */
     public function subDistance($value, $unit = self::M);
-
-    /**
-     * Sub the distance instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Distance  $distance
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function sub(self $distance);
-
-    /**
-     * Multiply distance by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function multiply($number);
-
-    /**
-     * Divide distance by the given number.
-     *
-     * @param  float|int  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Distance
-     */
-    public function divide($number);
 }

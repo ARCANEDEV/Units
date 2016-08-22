@@ -6,7 +6,7 @@
  * @package   Arcanedev\Units\Contracts
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface Weight extends UnitMeasure
+interface Weight extends UnitMeasure, Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
@@ -51,15 +51,6 @@ interface Weight extends UnitMeasure
      * @return \Arcanedev\Units\Contracts\Weight
      */
     public static function make($value = 0, $unit = self::KG, array $options = []);
-
-    /**
-     * Convert the weight to the given unit.
-     *
-     * @param  string  $to
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function to($to);
 
     /**
      * Convert the weight.
@@ -109,15 +100,6 @@ interface Weight extends UnitMeasure
     public function addWeight($value, $unit = self::KG);
 
     /**
-     * Add the weight instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Weight  $weight
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function add(self $weight);
-
-    /**
      * Sub the weight.
      *
      * @param  double|float|integer  $value
@@ -126,31 +108,4 @@ interface Weight extends UnitMeasure
      * @return \Arcanedev\Units\Contracts\Weight
      */
     public function subWeight($value, $unit = self::KG);
-
-    /**
-     * Sub the weight instance.
-     *
-     * @param  \Arcanedev\Units\Contracts\Weight  $weight
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function sub(self $weight);
-
-    /**
-     * Multiply weight by the given number.
-     *
-     * @param  integer|double|float  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function multiply($number);
-
-    /**
-     * Divide weight by the given number.
-     *
-     * @param  integer|double|float  $number
-     *
-     * @return \Arcanedev\Units\Contracts\Weight
-     */
-    public function divide($number);
 }
