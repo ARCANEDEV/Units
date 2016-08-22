@@ -1,0 +1,87 @@
+<?php namespace Arcanedev\Units;
+
+use Arcanedev\Support\PackageServiceProvider;
+
+/**
+ * Class     UnitsServiceProvider
+ *
+ * @package  Arcanedev\Units
+ * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
+ */
+class UnitsServiceProvider extends PackageServiceProvider
+{
+    /* ------------------------------------------------------------------------------------------------
+     |  Properties
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Package name.
+     *
+     * @var string
+     */
+    protected $package = 'units';
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the base path of the package.
+     *
+     * @return string
+     */
+    public function getBasePath()
+    {
+        return dirname(__DIR__);
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->registerConfig();
+
+        $this->singleton('arcanedev.units.manager', function ($app) {
+            return new UnitsManager($app);
+        });
+
+        $this->bind(Contracts\UnitsManager::class, 'arcanedev.units.manager');
+    }
+
+    /**
+     * Boot the service provider.
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        $this->publishConfig();
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return [
+            'arcanedev.units.manager',
+            Contracts\UnitsManager::class,
+        ];
+    }
+}
