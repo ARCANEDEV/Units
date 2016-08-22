@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Units\Measures;
 
 use Arcanedev\Units\Bases\UnitMeasure;
-use Arcanedev\Units\Contracts\Distance as DistanceContract;
+use Arcanedev\Units\Contracts\Measures\Distance as DistanceContract;
 use Arcanedev\Units\Traits\Calculatable;
 use Illuminate\Support\Arr;
 
@@ -89,7 +89,7 @@ class Distance extends UnitMeasure implements DistanceContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public static function make($value = 0, $unit = self::M, array $options = [])
     {
@@ -101,7 +101,7 @@ class Distance extends UnitMeasure implements DistanceContract
      *
      * @param  string  $to
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public function to($to)
     {
@@ -136,7 +136,7 @@ class Distance extends UnitMeasure implements DistanceContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public function addDistance($value, $unit = self::M)
     {
@@ -151,7 +151,7 @@ class Distance extends UnitMeasure implements DistanceContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public function subDistance($value, $unit = self::M)
     {

@@ -65,7 +65,7 @@ trait Calculatable
      *
      * @param  float|int  $number
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\Measures\Weight
      */
     public function divide($number)
     {

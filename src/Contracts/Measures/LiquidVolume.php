@@ -1,21 +1,27 @@
-<?php namespace Arcanedev\Units\Contracts;
+<?php namespace Arcanedev\Units\Contracts\Measures;
+
+use Arcanedev\Units\Contracts\Traits\Calculatable;
+use Arcanedev\Units\Contracts\UnitMeasure;
 
 /**
- * Interface  Weight
+ * Interface  LiquidVolume
  *
- * @package   Arcanedev\Units\Contracts
+ * @package   Arcanedev\Units\Contracts\Measures
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface Weight extends UnitMeasure, Calculatable
+interface LiquidVolume extends UnitMeasure, Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const TON = 't';
-    const KG  = 'kg';
-    const G   = 'g';
-    const MG  = 'mg';
+    const KL  = 'kl';
+    const HL  = 'hl';
+    const DAL = 'dal';
+    const L   = 'l';
+    const DL  = 'dl';
+    const CL  = 'cl';
+    const ML  = 'ml';
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -42,18 +48,18 @@ interface Weight extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make a weight instance.
+     * Make a volume instance.
      *
      * @param  double|float|integer  $value
      * @param  string                $unit
      * @param  array                 $options
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\LiquidVolume
      */
-    public static function make($value = 0, $unit = self::KG, array $options = []);
+    public static function make($value = 0, $unit = self::L, array $options = []);
 
     /**
-     * Convert the weight.
+     * Convert the volume.
      *
      * @param  string                $from
      * @param  string                $to
@@ -64,7 +70,7 @@ interface Weight extends UnitMeasure, Calculatable
     public static function convert($from, $to, $value);
 
     /**
-     * Format the weight with symbol.
+     * Format the volume with symbol.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -75,7 +81,7 @@ interface Weight extends UnitMeasure, Calculatable
     public function formatWithSymbol($decimals = null, $decimalSeparator = null, $thousandsSeparator = null);
 
     /**
-     * Format the weight.
+     * Format the volume.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -90,22 +96,22 @@ interface Weight extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Add the weight.
+     * Add the volume.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\LiquidVolume
      */
-    public function addWeight($value, $unit = self::KG);
+    public function addVolume($value, $unit = self::L);
 
     /**
-     * Sub the weight.
+     * Sub the volume.
      *
-     * @param  double|float|integer  $value
-     * @param  string                $unit
+     * @param  float|int  $value
+     * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\LiquidVolume
      */
-    public function subWeight($value, $unit = self::KG);
+    public function subVolume($value, $unit = self::L);
 }

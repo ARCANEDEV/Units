@@ -1,4 +1,5 @@
-<?php namespace Arcanedev\Units\Contracts;
+<?php namespace Arcanedev\Units\Contracts\Traits;
+use Arcanedev\Units\Contracts\UnitMeasure;
 
 /**
  * Interface  Calculatable
@@ -44,7 +45,7 @@ interface Calculatable
      *
      * @param  float|int  $number
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
      */
     public function divide($number);
 }

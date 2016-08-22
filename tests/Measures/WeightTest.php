@@ -15,7 +15,7 @@ class WeightTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var  \Arcanedev\Units\Contracts\Weight */
+    /** @var  \Arcanedev\Units\Contracts\Measures\Weight */
     private $weight;
 
     /* ------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class WeightTest extends TestCase
     {
         $expectations = [
             \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\Weight::class,
+            \Arcanedev\Units\Contracts\Measures\Weight::class,
             \Arcanedev\Units\Measures\Weight::class,
         ];
 
@@ -63,7 +63,7 @@ class WeightTest extends TestCase
     {
         $this->weight = Weight::make();
         $expectations = [
-            \Arcanedev\Units\Contracts\Weight::class,
+            \Arcanedev\Units\Contracts\Measures\Weight::class,
             \Arcanedev\Units\Measures\Weight::class,
         ];
 
