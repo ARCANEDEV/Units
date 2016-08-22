@@ -1,24 +1,24 @@
-<?php namespace Arcanedev\Units\Contracts;
+<?php namespace Arcanedev\Units\Contracts\Measures;
+
+use Arcanedev\Units\Contracts\Traits\Calculatable;
+use Arcanedev\Units\Contracts\UnitMeasure;
 
 /**
- * Interface  Distance
+ * Interface  Weight
  *
- * @package   Arcanedev\Units\Contracts
+ * @package   Arcanedev\Units\Contracts\Measures
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface Distance extends UnitMeasure, Calculatable
+interface Weight extends UnitMeasure, Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const KM  = 'km';
-    const HM  = 'hm';
-    const DAM = 'dam';
-    const M   = 'm';
-    const DM  = 'dm';
-    const CM  = 'cm';
-    const MM  = 'mm';
+    const TON = 't';
+    const KG  = 'kg';
+    const G   = 'g';
+    const MG  = 'mg';
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -45,18 +45,18 @@ interface Distance extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make a distance instance.
+     * Make a weight instance.
      *
      * @param  double|float|integer  $value
      * @param  string                $unit
      * @param  array                 $options
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Weight
      */
-    public static function make($value = 0, $unit = self::M, array $options = []);
+    public static function make($value = 0, $unit = self::KG, array $options = []);
 
     /**
-     * Convert the distance.
+     * Convert the weight.
      *
      * @param  string                $from
      * @param  string                $to
@@ -67,7 +67,7 @@ interface Distance extends UnitMeasure, Calculatable
     public static function convert($from, $to, $value);
 
     /**
-     * Format the distance with symbol.
+     * Format the weight with symbol.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -78,7 +78,7 @@ interface Distance extends UnitMeasure, Calculatable
     public function formatWithSymbol($decimals = null, $decimalSeparator = null, $thousandsSeparator = null);
 
     /**
-     * Format the distance.
+     * Format the weight.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -93,22 +93,22 @@ interface Distance extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Add the distance.
+     * Add the weight.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Weight
      */
-    public function addDistance($value, $unit = self::M);
+    public function addWeight($value, $unit = self::KG);
 
     /**
-     * Sub the distance.
+     * Sub the weight.
      *
-     * @param  float|int  $value
-     * @param  string     $unit
+     * @param  double|float|integer  $value
+     * @param  string                $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Weight
      */
-    public function subDistance($value, $unit = self::M);
+    public function subWeight($value, $unit = self::KG);
 }

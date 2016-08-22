@@ -15,7 +15,7 @@ class LiquidVolumeTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var  \Arcanedev\Units\Contracts\LiquidVolume */
+    /** @var  \Arcanedev\Units\Contracts\Measures\LiquidVolume */
     private $volume;
 
     /* ------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class LiquidVolumeTest extends TestCase
     {
         $expectations = [
             \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\LiquidVolume::class,
+            \Arcanedev\Units\Contracts\Measures\LiquidVolume::class,
             \Arcanedev\Units\Measures\LiquidVolume::class,
         ];
 
@@ -64,7 +64,7 @@ class LiquidVolumeTest extends TestCase
         $this->volume = LiquidVolume::make();
         $expectations   = [
             \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\LiquidVolume::class,
+            \Arcanedev\Units\Contracts\Measures\LiquidVolume::class,
             \Arcanedev\Units\Measures\LiquidVolume::class,
         ];
 

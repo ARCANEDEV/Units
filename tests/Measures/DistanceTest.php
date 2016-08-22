@@ -15,7 +15,7 @@ class DistanceTest extends TestCase
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
-    /** @var  \Arcanedev\Units\Contracts\Distance */
+    /** @var  \Arcanedev\Units\Contracts\Measures\Distance */
     private $distance;
 
     /* ------------------------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ class DistanceTest extends TestCase
     {
         $expectations = [
             \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\Distance::class,
+            \Arcanedev\Units\Contracts\Measures\Distance::class,
             \Arcanedev\Units\Measures\Distance::class,
         ];
 
@@ -64,7 +64,7 @@ class DistanceTest extends TestCase
         $this->distance = Distance::make();
         $expectations   = [
             \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\Distance::class,
+            \Arcanedev\Units\Contracts\Measures\Distance::class,
             \Arcanedev\Units\Measures\Distance::class,
         ];
 

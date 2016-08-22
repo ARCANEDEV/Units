@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Units\Measures;
 
 use Arcanedev\Units\Bases\UnitMeasure;
-use Arcanedev\Units\Contracts\LiquidVolume as LiquidVolumeContract;
+use Arcanedev\Units\Contracts\Measures\LiquidVolume as LiquidVolumeContract;
 use Arcanedev\Units\Traits\Calculatable;
 use Illuminate\Support\Arr;
 
@@ -89,7 +89,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
      */
     public static function make($value = 0, $unit = self::L, array $options = [])
     {
@@ -101,7 +101,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      *
      * @param  string  $to
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
      */
     public function to($to)
     {
@@ -136,7 +136,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
      */
     public function addVolume($value, $unit = self::L)
     {
@@ -151,7 +151,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
      */
     public function subVolume($value, $unit = self::L)
     {

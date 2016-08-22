@@ -1,7 +1,7 @@
 <?php namespace Arcanedev\Units\Measures;
 
 use Arcanedev\Units\Bases\UnitMeasure;
-use Arcanedev\Units\Contracts\Weight as WeightContract;
+use Arcanedev\Units\Contracts\Measures\Weight as WeightContract;
 use Arcanedev\Units\Traits\Calculatable;
 use Illuminate\Support\Arr;
 

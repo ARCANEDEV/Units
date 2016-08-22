@@ -1,24 +1,27 @@
-<?php namespace Arcanedev\Units\Contracts;
+<?php namespace Arcanedev\Units\Contracts\Measures;
+
+use Arcanedev\Units\Contracts\Traits\Calculatable;
+use Arcanedev\Units\Contracts\UnitMeasure;
 
 /**
- * Interface  LiquidVolume
+ * Interface  Distance
  *
- * @package   Arcanedev\Units\Contracts
+ * @package   Arcanedev\Units\Contracts\Measures
  * @author    ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-interface LiquidVolume extends UnitMeasure, Calculatable
+interface Distance extends UnitMeasure, Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
      |  Constants
      | ------------------------------------------------------------------------------------------------
      */
-    const KL  = 'kl';
-    const HL  = 'hl';
-    const DAL = 'dal';
-    const L   = 'l';
-    const DL  = 'dl';
-    const CL  = 'cl';
-    const ML  = 'ml';
+    const KM  = 'km';
+    const HM  = 'hm';
+    const DAM = 'dam';
+    const M   = 'm';
+    const DM  = 'dm';
+    const CM  = 'cm';
+    const MM  = 'mm';
 
     /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
@@ -45,18 +48,18 @@ interface LiquidVolume extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Make a volume instance.
+     * Make a distance instance.
      *
      * @param  double|float|integer  $value
      * @param  string                $unit
      * @param  array                 $options
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Distance
      */
-    public static function make($value = 0, $unit = self::L, array $options = []);
+    public static function make($value = 0, $unit = self::M, array $options = []);
 
     /**
-     * Convert the volume.
+     * Convert the distance.
      *
      * @param  string                $from
      * @param  string                $to
@@ -67,7 +70,7 @@ interface LiquidVolume extends UnitMeasure, Calculatable
     public static function convert($from, $to, $value);
 
     /**
-     * Format the volume with symbol.
+     * Format the distance with symbol.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -78,7 +81,7 @@ interface LiquidVolume extends UnitMeasure, Calculatable
     public function formatWithSymbol($decimals = null, $decimalSeparator = null, $thousandsSeparator = null);
 
     /**
-     * Format the volume.
+     * Format the distance.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -93,22 +96,22 @@ interface LiquidVolume extends UnitMeasure, Calculatable
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Add the volume.
+     * Add the distance.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Distance
      */
-    public function addVolume($value, $unit = self::L);
+    public function addDistance($value, $unit = self::M);
 
     /**
-     * Sub the volume.
+     * Sub the distance.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Distance
      */
-    public function subVolume($value, $unit = self::L);
+    public function subDistance($value, $unit = self::M);
 }
