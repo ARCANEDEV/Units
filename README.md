@@ -1,4 +1,4 @@
-# Units [![Packagist License][badge_license]](LICENSE.md) [![For Laravel 5][badge_laravel]][link-github-repo]
+# Units [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo] [![For Laravel 5][badge_laravel]][link-github-repo]
 
 [![Travis Status][badge_build]][link-travis]
 [![HHVM Status][badge_hhvm]][link-hhvm]
@@ -15,6 +15,15 @@
 
 Units package that allows you to manage multiple units of measure in easy way.
 
+### Features
+
+  * Framework agnostic package.
+  * Easy setup &amp; configuration.
+  * Well documented &amp; IDE Friendly.
+  * Well tested with maximum code quality.
+  * Laravel `5.1 | 5.2` are supported.
+  * Made with :heart: &amp; :coffee:.
+
 ## Table of contents
 
 1. [Requirements](_docs/1.Requirements.md)
@@ -24,12 +33,7 @@ Units package that allows you to manage multiple units of measure in easy way.
 
 ## TODOS
 
-  - [ ] Framework Agnostic Package.
-  - [ ] 100% Code coverage + Maximum code quality.
   - [ ] Laravel 5.3 support.
-  - [ ] Laravel 5.2 support.
-  - [ ] Laravel 5.1 support.
-  - [ ] Well documented package (IDE Friendly).
   - [ ] Documentation.
 
 ## Contribution
@@ -45,7 +49,8 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [ARCANEDEV][link-author]
 - [All Contributors][link-contributors]
 
-[badge_laravel]:      https://img.shields.io/badge/For-Laravel%205.1|5.2-orange.svg?style=flat-square
+[badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel%20Supported-5.1|5.2-orange.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/units.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/Units.svg?style=flat-square
 [badge_hhvm]:         https://img.shields.io/hhvm/arcanedev/units.svg?style=flat-square
