@@ -8,12 +8,28 @@
  */
 interface UnitsManager
 {
-    /**
-     * Get an unit of measure implementation.
-     *
-     * @param  string  $driver
-     *
-     * @return \Arcanedev\Units\Contracts\UnitMeasure
+    /* ------------------------------------------------------------------------------------------------
+     |  Main Functions
+     | ------------------------------------------------------------------------------------------------
      */
-    public function driver($driver = null);
+    /**
+     * Create the distance unit instance.
+     *
+     * @return \Arcanedev\Units\Bases\UnitMeasure
+     */
+    public function distance();
+
+    /**
+     * Create the liquid volume unit instance.
+     *
+     * @return \Arcanedev\Units\Bases\UnitMeasure
+     */
+    public function liquidVolume();
+
+    /**
+     * Create the weight unit instance.
+     *
+     * @return \Arcanedev\Units\Bases\UnitMeasure
+     */
+    public function weight();
 }

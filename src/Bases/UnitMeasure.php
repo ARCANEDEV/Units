@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Units\Bases;
 
+use Arcanedev\Units\Contracts\UnitMeasure as UnitMeasureContract;
 use Arcanedev\Units\Exceptions\InvalidUnitException;
 use Illuminate\Support\Arr;
 use ReflectionClass;
@@ -10,7 +11,7 @@ use ReflectionClass;
  * @package  Arcanedev\Units\Base
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-abstract class UnitMeasure
+abstract class UnitMeasure implements UnitMeasureContract
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
@@ -31,11 +32,18 @@ abstract class UnitMeasure
     protected $value;
 
     /**
-     * The symbols.
+     * The unit symbols.
      *
      * @var array
      */
     protected $symbols  = [];
+
+    /**
+     * The unit names.
+     *
+     * @var array
+     */
+    protected $names  = [];
 
     /**
      * The number of decimals to format.
@@ -59,11 +67,49 @@ abstract class UnitMeasure
     protected $thousandsSeparator = ',';
 
     /* ------------------------------------------------------------------------------------------------
+     |  Init Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Make a distance instance.
+     *
+     * @param  float|int  $value
+     * @param  string     $unit
+     * @param  array      $options
+     *
+     * @return static
+     */
+    public static function make($value = 0, $unit = null, array $options = [])
+    {
+        return new static($value, $unit, $options);
+    }
+
+    /**
+     * Initialize the unit.
+     *
+     * @param  float|int  $value
+     * @param  string     $unit
+     * @param  array      $options
+     */
+    protected function init($value, $unit, array $options)
+    {
+        $this->setValue($value);
+        $this->setUnit($unit);
+        $this->setSymbols(Arr::get($options, 'symbols', []));
+        $this->setNames(Arr::get($options, 'names', []));
+        $this->setFormat(
+            Arr::get($options, 'format.decimals', 0),
+            Arr::get($options, 'format.decimal-separator', ','),
+            Arr::get($options, 'format.thousands-separator', '.')
+        );
+    }
+
+    /* ------------------------------------------------------------------------------------------------
      |  Getters & Setters
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the weight value.
+     * Get the unit value.
      *
      * @return float|int
      */
@@ -73,7 +119,7 @@ abstract class UnitMeasure
     }
 
     /**
-     * Set the weight value.
+     * Set the unit value.
      *
      * @param  float|int  $value
      *
@@ -100,7 +146,7 @@ abstract class UnitMeasure
     }
 
     /**
-     * Get the weight unit.
+     * Get the unit key.
      *
      * @return string
      */
@@ -110,7 +156,7 @@ abstract class UnitMeasure
     }
 
     /**
-     * Set the weight unit.
+     * Set the unit key.
      *
      * @param  string  $unit
      *
@@ -126,7 +172,7 @@ abstract class UnitMeasure
     }
 
     /**
-     * Get the available units.
+     * Get the unit symbols.
      *
      * @return array
      */
@@ -136,13 +182,41 @@ abstract class UnitMeasure
     }
 
     /**
-     * Get the symbol.
+     * Get the default symbols.
+     *
+     * @return array
+     */
+    protected static function defaultSymbols()
+    {
+        return array_combine(static::units(), static::units());
+    }
+
+    /**
+     * Set the unit symbols.
+     *
+     * @param  array  $symbols
+     *
+     * @return static
+     */
+    public function setSymbols(array $symbols)
+    {
+        if (empty($symbols)) $symbols = static::defaultSymbols();
+
+        foreach ($symbols as $unit => $symbol) {
+            $this->setSymbol($unit, $symbol);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the unit symbol.
      *
      * @return string
      */
     public function symbol()
     {
-        return Arr::get($this->symbols(), $this->unit);
+        return Arr::get($this->symbols(), $this->unit());
     }
 
     /**
@@ -163,29 +237,77 @@ abstract class UnitMeasure
     }
 
     /**
-     * Get the default symbols.
+     * Get the unit names.
      *
      * @return array
      */
-    protected static function defaultSymbols()
+    public function names()
     {
-        return array_combine(static::units(), static::units());
+        return $this->names;
     }
 
     /**
-     * Set the symbols.
+     * Get the default names.
      *
-     * @param  array  $symbols
+     * @return array
+     */
+    abstract protected function defaultNames();
+
+    /**
+     * Set the unit names.
+     *
+     * @param  array  $names
      *
      * @return static
      */
-    public function setSymbols(array $symbols)
+    public function setNames(array $names)
     {
-        if (empty($symbols)) $symbols = static::defaultSymbols();
+        if (empty($names)) $names = $this->defaultNames();
 
-        foreach ($symbols as $unit => $symbol) {
-            $this->setSymbol($unit, $symbol);
+        foreach ($names as $unit => $name) {
+            $this->setName($unit, $name);
         }
+
+        return $this;
+    }
+
+    /**
+     * Get the unit name.
+     *
+     * @return string
+     */
+    public function name()
+    {
+        return $this->getName($this->unit());
+    }
+
+    /**
+     * Get the name by a given unit.
+     *
+     * @param  string  $unit
+     *
+     * @return string
+     */
+    public function getName($unit)
+    {
+        static::checkUnit($unit);
+
+        return Arr::get($this->names(), $unit);
+    }
+
+    /**
+     * Set the unit name.
+     *
+     * @param  string  $unit
+     * @param  string  $name
+     *
+     * @return static
+     */
+    public function setName($unit, $name)
+    {
+        static::checkUnit($unit);
+
+        $this->names[$unit] = $name;
 
         return $this;
     }
@@ -213,7 +335,45 @@ abstract class UnitMeasure
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Format the weight.
+     * Convert the unit to the given unit key.
+     *
+     * @param  string  $to
+     *
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
+     */
+    public function to($to)
+    {
+        if ($to === $this->unit()) return $this;
+
+        $value = static::convert($this->unit(), $to, $this->value());
+
+        return static::make($value, $to, [
+            'symbols' => $this->symbols(),
+            'names'   => $this->names(),
+            'format'  => [
+                'decimals'            => $this->decimals,
+                'decimal-separator'   => $this->decimalSeparator,
+                'thousands-separator' => $this->thousandsSeparator,
+            ],
+        ]);
+    }
+
+    /**
+     * Convert the unit.
+     *
+     * @param  string     $from
+     * @param  string     $to
+     * @param  float|int  $value
+     *
+     * @return float|int
+     */
+    public static function convert($from, $to, $value)
+    {
+        return $value * static::getRatio($to, $from);
+    }
+
+    /**
+     * Format the unit.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -234,7 +394,7 @@ abstract class UnitMeasure
     }
 
     /**
-     * Format the weight with symbol.
+     * Format the unit with symbol.
      *
      * @param  int|null     $decimals
      * @param  string|null  $decimalSeparator
@@ -264,6 +424,38 @@ abstract class UnitMeasure
      |  Check Functions
      | ------------------------------------------------------------------------------------------------
      */
+    /**
+     * Get the unit ratio.
+     *
+     * @param  string  $to
+     * @param  string  $from
+     *
+     * @return float|int
+     */
+    protected static function getRatio($to, $from)
+    {
+        static::checkUnit($from);
+        static::checkUnit($to);
+
+        if ($to === $from) return 1;
+
+        $ratios = static::getRatios();
+
+        return $ratios[$to] / $ratios[$from];
+    }
+
+    /**
+     * Get all the unit ratios.
+     *
+     * @codeCoverageIgnore
+     *
+     * @return array
+     */
+    protected static function getRatios()
+    {
+        return [];
+    }
+
     /**
      * Check the weight unit.
      *

@@ -48,18 +48,11 @@ class UnitsServiceProvider extends PackageServiceProvider
      */
     /**
      * Register the service provider.
-     *
-     * @return void
      */
     public function register()
     {
         $this->registerConfig();
-
-        $this->singleton('arcanedev.units.manager', function ($app) {
-            return new UnitsManager($app);
-        });
-
-        $this->bind(Contracts\UnitsManager::class, 'arcanedev.units.manager');
+        $this->registerManager();
     }
 
     /**
@@ -83,5 +76,21 @@ class UnitsServiceProvider extends PackageServiceProvider
             'arcanedev.units.manager',
             Contracts\UnitsManager::class,
         ];
+    }
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Other Functions
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Register the Units Manager.
+     */
+    private function registerManager()
+    {
+        $this->singleton('arcanedev.units.manager', function ($app) {
+            return new UnitsManager($app);
+        });
+
+        $this->bind(Contracts\UnitsManager::class, 'arcanedev.units.manager');
     }
 }

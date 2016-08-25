@@ -22,7 +22,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
      *
      * @return Bases\UnitMeasure
      */
-    public function createDistanceDriver()
+    public function distance()
     {
         return $this->buildUnit('distance', Measures\Distance::class);
     }
@@ -32,7 +32,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
      *
      * @return Bases\UnitMeasure
      */
-    public function createLiquidVolumeDriver()
+    public function liquidVolume()
     {
         return $this->buildUnit('liquid-volume', Measures\LiquidVolume::class);
     }
@@ -42,9 +42,39 @@ class UnitsManager extends Manager implements UnitsManagerContract
      *
      * @return Bases\UnitMeasure
      */
-    public function createWeightDriver()
+    public function weight()
     {
         return $this->buildUnit('weight', Measures\Weight::class);
+    }
+
+    /**
+     * Create the distance unit driver.
+     *
+     * @return Bases\UnitMeasure
+     */
+    protected function createDistanceDriver()
+    {
+        return $this->distance();
+    }
+
+    /**
+     * Create the liquid volume unit driver.
+     *
+     * @return Bases\UnitMeasure
+     */
+    protected function createLiquidVolumeDriver()
+    {
+        return $this->liquidVolume();
+    }
+
+    /**
+     * Create the weight unit driver.
+     *
+     * @return Bases\UnitMeasure
+     */
+    protected function createWeightDriver()
+    {
+        return $this->weight();
     }
 
     /**

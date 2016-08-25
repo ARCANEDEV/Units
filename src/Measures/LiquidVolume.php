@@ -3,7 +3,6 @@
 use Arcanedev\Units\Bases\UnitMeasure;
 use Arcanedev\Units\Contracts\Measures\LiquidVolume as LiquidVolumeContract;
 use Arcanedev\Units\Traits\Calculatable;
-use Illuminate\Support\Arr;
 
 /**
  * Class     LiquidVolume
@@ -32,14 +31,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      */
     public function __construct($value = 0, $unit = self::L, array $options = [])
     {
-        $this->setValue($value);
-        $this->setUnit($unit);
-        $this->setSymbols(Arr::get($options, 'symbols', []));
-        $this->setFormat(
-            Arr::get($options, 'decimals', 0),
-            Arr::get($options, 'separators.decimal', ','),
-            Arr::get($options, 'separators.thousands', '.')
-        );
+        $this->init($value, $unit, $options);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -47,11 +39,11 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the symbol's names.
+     * Get the default names.
      *
      * @return array
      */
-    public static function names()
+    public function defaultNames()
     {
         return array_combine(static::units(), [
             'kilolitre',
@@ -62,20 +54,6 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
             'centilitre',
             'millilitre',
         ]);
-    }
-
-    /**
-     * Get the symbol name.
-     *
-     * @param  string  $unit
-     *
-     * @return string
-     */
-    public static function getSymbolName($unit)
-    {
-        static::checkUnit($unit);
-
-        return Arr::get(static::names(), $unit);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -89,41 +67,11 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
+     * @return static
      */
     public static function make($value = 0, $unit = self::L, array $options = [])
     {
-        return new static($value, $unit, $options);
-    }
-
-    /**
-     * Convert the volume to the given unit.
-     *
-     * @param  string  $to
-     *
-     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
-     */
-    public function to($to)
-    {
-        if ($to === $this->unit()) return $this;
-
-        $value = static::convert($this->unit(), $to, $this->value());
-
-        return static::make($value, $to);
-    }
-
-    /**
-     * Convert the volume.
-     *
-     * @param  string     $from
-     * @param  string     $to
-     * @param  float|int  $value
-     *
-     * @return float|int
-     */
-    public static function convert($from, $to, $value)
-    {
-        return $value * static::getRatio($to, $from);
+        return parent::make($value, $unit, $options);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -140,9 +88,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      */
     public function addVolume($value, $unit = self::L)
     {
-        return $this->add(
-            self::make($value, $unit)
-        );
+        return $this->add(static::make($value, $unit));
     }
 
     /**
@@ -155,9 +101,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      */
     public function subVolume($value, $unit = self::L)
     {
-        return $this->sub(
-            static::make($value, $unit)
-        );
+        return $this->sub(static::make($value, $unit));
     }
 
     /* ------------------------------------------------------------------------------------------------

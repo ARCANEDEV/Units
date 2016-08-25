@@ -1,5 +1,6 @@
-<?php namespace Arcanedev\Units\Tests;
+<?php namespace Arcanedev\Units\Tests\Laravel;
 
+use Arcanedev\Units\Tests\LaravelTestCase;
 use Arcanedev\Units\UnitsServiceProvider;
 
 /**

@@ -1,20 +1,23 @@
-<?php namespace Arcanedev\Units\Tests\Measures;
+<?php namespace Arcanedev\Units\Tests\Laravel\Measures;
 
 use Arcanedev\Units\Measures\Weight;
-use Arcanedev\Units\Tests\TestCase;
+use Arcanedev\Units\Tests\LaravelTestCase;
 
 /**
  * Class     WeightTest
  *
- * @package  Arcanedev\Units\Tests\Measures
+ * @package  Arcanedev\Units\Tests\Laravel\Measures
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class WeightTest extends TestCase
+class WeightTest extends LaravelTestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /** @var  \Arcanedev\Units\Contracts\UnitsManager */
+    protected $manager;
+
     /** @var  \Arcanedev\Units\Contracts\Measures\Weight */
     private $weight;
 
@@ -26,7 +29,8 @@ class WeightTest extends TestCase
     {
         parent::setUp();
 
-        $this->weight = new Weight;
+        $this->manager = $this->app->make(\Arcanedev\Units\Contracts\UnitsManager::class);
+        $this->weight  = $this->manager->weight();
     }
 
     public function tearDown()
@@ -56,38 +60,7 @@ class WeightTest extends TestCase
         $this->assertSame(0, $this->weight->value());
         $this->assertSame(Weight::KG, $this->weight->unit());
         $this->assertSame('kg', $this->weight->symbol());
-        $this->assertSame('kilogram', $this->weight->name());
-    }
-
-    /** @test */
-    public function it_can_make()
-    {
-        $this->weight = Weight::make();
-        $expectations = [
-            \Arcanedev\Units\Contracts\Measures\Weight::class,
-            \Arcanedev\Units\Measures\Weight::class,
-        ];
-
-        foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->weight);
-        }
-
-        $this->assertSame(0, $this->weight->value());
-        $this->assertSame(Weight::KG, $this->weight->unit());
-    }
-
-    /** @test */
-    public function it_can_get_available_units()
-    {
-        $units = Weight::units();
-
-        $this->assertCount(4, $units);
-        $this->assertSame([
-            Weight::TON,
-            Weight::KG,
-            Weight::G,
-            Weight::MG,
-        ], $units);
+        $this->assertSame('Kilogram', $this->weight->name());
     }
 
     /** @test */
@@ -104,17 +77,6 @@ class WeightTest extends TestCase
 
             $this->assertNotSame($unit, $name);
             $this->assertSame($this->weight->getName($unit), $name);
-        }
-    }
-
-    /** @test */
-    public function it_can_get_default_symbols()
-    {
-        $units = Weight::units();
-
-        foreach ($this->weight->symbols() as $unit => $symbol) {
-            $this->assertTrue(in_array($unit, $units));
-            $this->assertSame($unit, $symbol);
         }
     }
 
@@ -147,8 +109,8 @@ class WeightTest extends TestCase
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->weight->format());
-        $this->assertSame('1.234,567', $this->weight->format(3));
+        $this->assertSame('1 235', $this->weight->format());
+        $this->assertSame('1 234,567', $this->weight->format(3));
     }
 
     /** @test */
@@ -158,8 +120,8 @@ class WeightTest extends TestCase
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235 kg',     $this->weight->formatWithSymbol());
-        $this->assertSame('1.234,567 kg', $this->weight->formatWithSymbol(3));
+        $this->assertSame('1 235 kg',     $this->weight->formatWithSymbol());
+        $this->assertSame('1 234,567 kg', $this->weight->formatWithSymbol(3));
     }
 
     /** @test */
@@ -169,11 +131,11 @@ class WeightTest extends TestCase
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235 kg', (string) $this->weight);
+        $this->assertSame('1 235 kg', (string) $this->weight);
 
         $this->weight->setValue(-1234.567);
 
-        $this->assertSame('-1.235 kg', (string) $this->weight);
+        $this->assertSame('-1 235 kg', (string) $this->weight);
     }
 
     /* ------------------------------------------------------------------------------------------------

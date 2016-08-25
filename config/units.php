@@ -5,6 +5,10 @@ use Arcanedev\Units\Contracts\Measures\LiquidVolume;
 use Arcanedev\Units\Contracts\Measures\Weight;
 
 return [
+    /* ------------------------------------------------------------------------------------------------
+     |  Distance Unit
+     | ------------------------------------------------------------------------------------------------
+     */
     'distance'      => [
         'default' => Distance::M,
         'symbols' => [
@@ -25,16 +29,21 @@ return [
             Distance::CM  => 'Centimeter',
             Distance::MM  => 'Millimeter',
         ],
-        'options'  => [
-            'decimals' => 0,
+        'format'  => [
+            'decimals'            => 0,
             'decimal-separator'   => ',',
-            'thousands-separator' => '.',
+            'thousands-separator' => ' ',
         ],
     ],
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Liquid Volume Unit
+     | ------------------------------------------------------------------------------------------------
+     */
     'liquid-volume' => [
         'default' => LiquidVolume::L,
         'symbols' => [
-            LiquidVolume::KL  => 'Ll',
+            LiquidVolume::KL  => 'kl',
             LiquidVolume::HL  => 'hl',
             LiquidVolume::DAL => 'dal',
             LiquidVolume::L   => 'l',
@@ -52,13 +61,18 @@ return [
             LiquidVolume::ML  => 'Millilitre',
         ],
         'format'  => [
-            'decimals' => 0,
+            'decimals'            => 0,
             'decimal-separator'   => ',',
-            'thousands-separator' => '.',
+            'thousands-separator' => ' ',
         ],
     ],
+
+    /* ------------------------------------------------------------------------------------------------
+     |  Weight Unit
+     | ------------------------------------------------------------------------------------------------
+     */
     'weight'        => [
-        'default' => Weight::G,
+        'default' => Weight::KG,
         'symbols' => [
             Weight::TON => 't',
             Weight::KG  => 'kg',
@@ -72,9 +86,9 @@ return [
             Weight::MG  => 'Milligram',
         ],
         'format'  => [
-            'decimals' => 0,
+            'decimals'            => 0,
             'decimal-separator'   => ',',
-            'thousands-separator' => '.',
+            'thousands-separator' => ' ',
         ],
     ],
 ];

@@ -1,4 +1,5 @@
-<?php namespace Arcanedev\Units\Tests;
+<?php namespace Arcanedev\Units\Tests\Laravel;
+use Arcanedev\Units\Tests\LaravelTestCase;
 
 /**
  * Class     UnitsManagerTest
@@ -13,7 +14,7 @@ class UnitsManagerTest extends LaravelTestCase
      | ------------------------------------------------------------------------------------------------
      */
     /** @var  \Arcanedev\Units\UnitsManager */
-    private $manager;
+    protected $manager;
 
     /* ------------------------------------------------------------------------------------------------
      |  Main Functions
@@ -65,24 +66,42 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_instantiate_distance_unit()
     {
-        $distance = $this->manager->driver('distance');
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Distance::class,
+            $this->manager->driver('distance')
+        );
 
-        $this->assertInstanceOf(\Arcanedev\Units\Measures\Distance::class, $distance);
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Distance::class,
+            $this->manager->distance()
+        );
     }
 
     /** @test */
     public function it_can_instantiate_weight_unit()
     {
-        $weight = $this->manager->driver('weight');
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Weight::class,
+            $this->manager->driver('weight')
+        );
 
-        $this->assertInstanceOf(\Arcanedev\Units\Measures\Weight::class, $weight);
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Weight::class,
+            $this->manager->weight()
+        );
     }
 
     /** @test */
     public function it_can_instantiate_liquid_volume_unit()
     {
-        $volume = $this->manager->driver('liquid-volume');
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\LiquidVolume::class,
+            $this->manager->driver('liquid-volume')
+        );
 
-        $this->assertInstanceOf(\Arcanedev\Units\Measures\LiquidVolume::class, $volume);
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\LiquidVolume::class,
+            $this->manager->liquidVolume()
+        );
     }
 }

@@ -21,26 +21,6 @@ interface Weight extends UnitMeasure, Calculatable
     const MG  = 'mg';
 
     /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the symbol's names.
-     *
-     * @return array
-     */
-    public static function names();
-
-    /**
-     * Get the symbol name.
-     *
-     * @param  string  $unit
-     *
-     * @return string
-     */
-    public static function getSymbolName($unit);
-
-    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -51,20 +31,9 @@ interface Weight extends UnitMeasure, Calculatable
      * @param  string                $unit
      * @param  array                 $options
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\Measures\Weight
      */
     public static function make($value = 0, $unit = self::KG, array $options = []);
-
-    /**
-     * Convert the weight.
-     *
-     * @param  string                $from
-     * @param  string                $to
-     * @param  double|float|integer  $value
-     *
-     * @return double|float|integer
-     */
-    public static function convert($from, $to, $value);
 
     /**
      * Format the weight with symbol.
@@ -98,7 +67,7 @@ interface Weight extends UnitMeasure, Calculatable
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\Measures\Weight
      */
     public function addWeight($value, $unit = self::KG);
 
@@ -108,7 +77,7 @@ interface Weight extends UnitMeasure, Calculatable
      * @param  double|float|integer  $value
      * @param  string                $unit
      *
-     * @return \Arcanedev\Units\Contracts\Weight
+     * @return \Arcanedev\Units\Contracts\Measures\Weight
      */
     public function subWeight($value, $unit = self::KG);
 }

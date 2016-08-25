@@ -24,48 +24,28 @@ interface Distance extends UnitMeasure, Calculatable
     const MM  = 'mm';
 
     /* ------------------------------------------------------------------------------------------------
-     |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
-     */
-    /**
-     * Get the symbol's names.
-     *
-     * @return array
-     */
-    public static function names();
-
-    /**
-     * Get the symbol name.
-     *
-     * @param  string  $unit
-     *
-     * @return string
-     */
-    public static function getSymbolName($unit);
-
-    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
     /**
      * Make a distance instance.
      *
-     * @param  double|float|integer  $value
-     * @param  string                $unit
-     * @param  array                 $options
+     * @param  float|int  $value
+     * @param  string     $unit
+     * @param  array      $options
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return static
      */
     public static function make($value = 0, $unit = self::M, array $options = []);
 
     /**
      * Convert the distance.
      *
-     * @param  string                $from
-     * @param  string                $to
-     * @param  double|float|integer  $value
+     * @param  string     $from
+     * @param  string     $to
+     * @param  float|int  $value
      *
-     * @return double|float|integer
+     * @return float|int
      */
     public static function convert($from, $to, $value);
 
@@ -101,7 +81,7 @@ interface Distance extends UnitMeasure, Calculatable
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public function addDistance($value, $unit = self::M);
 
@@ -111,7 +91,7 @@ interface Distance extends UnitMeasure, Calculatable
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance
      */
     public function subDistance($value, $unit = self::M);
 }

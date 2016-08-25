@@ -1,20 +1,23 @@
-<?php namespace Arcanedev\Units\Tests\Measures;
+<?php namespace Arcanedev\Units\Tests\Laravel\Measures;
 
 use Arcanedev\Units\Measures\Distance;
-use Arcanedev\Units\Tests\TestCase;
+use Arcanedev\Units\Tests\LaravelTestCase;
 
 /**
  * Class     DistanceTest
  *
- * @package  Arcanedev\Units\Tests\Measures
+ * @package  Arcanedev\Units\Tests\Laravel\Measures
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class DistanceTest extends TestCase
+class DistanceTest extends LaravelTestCase
 {
     /* ------------------------------------------------------------------------------------------------
      |  Properties
      | ------------------------------------------------------------------------------------------------
      */
+    /** @var  \Arcanedev\Units\Contracts\UnitsManager */
+    protected $manager;
+
     /** @var  \Arcanedev\Units\Contracts\Measures\Distance */
     private $distance;
 
@@ -26,12 +29,13 @@ class DistanceTest extends TestCase
     {
         parent::setUp();
 
-        $this->distance = new Distance;
+        $this->manager  = $this->app->make(\Arcanedev\Units\Contracts\UnitsManager::class);
+        $this->distance = $this->manager->distance();
     }
 
     public function tearDown()
     {
-        unset($this->distance);
+        unset($this->manager, $this->distance);
 
         parent::tearDown();
     }
@@ -56,42 +60,7 @@ class DistanceTest extends TestCase
         $this->assertSame(0, $this->distance->value());
         $this->assertSame(Distance::M, $this->distance->unit());
         $this->assertSame('m', $this->distance->symbol());
-        $this->assertSame('metre', $this->distance->name());
-    }
-
-    /** @test */
-    public function it_can_make()
-    {
-        $this->distance = Distance::make();
-        $expectations   = [
-            \Arcanedev\Units\Bases\UnitMeasure::class,
-            \Arcanedev\Units\Contracts\Measures\Distance::class,
-            \Arcanedev\Units\Measures\Distance::class,
-        ];
-
-        foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->distance);
-        }
-
-        $this->assertSame(0, $this->distance->value());
-        $this->assertSame(Distance::M, $this->distance->unit());
-    }
-
-    /** @test */
-    public function it_can_get_available_units()
-    {
-        $units = Distance::units();
-
-        $this->assertCount(7, $units);
-        $this->assertSame([
-            Distance::KM,
-            Distance::HM,
-            Distance::DAM,
-            Distance::M,
-            Distance::DM,
-            Distance::CM,
-            Distance::MM,
-        ], $units);
+        $this->assertSame('Meter', $this->distance->name());
     }
 
     /** @test */
@@ -151,8 +120,8 @@ class DistanceTest extends TestCase
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->distance->format());
-        $this->assertSame('1.234,567', $this->distance->format(3));
+        $this->assertSame('1 235', $this->distance->format());
+        $this->assertSame('1 234,567', $this->distance->format(3));
     }
 
     /** @test */
@@ -162,8 +131,8 @@ class DistanceTest extends TestCase
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235 m',     $this->distance->formatWithSymbol());
-        $this->assertSame('1.234,567 m', $this->distance->formatWithSymbol(3));
+        $this->assertSame('1 235 m',     $this->distance->formatWithSymbol());
+        $this->assertSame('1 234,567 m', $this->distance->formatWithSymbol(3));
 
         $this->distance = $this->distance->to(Distance::KM);
 
@@ -172,7 +141,7 @@ class DistanceTest extends TestCase
 
         $this->distance = $this->distance->to(Distance::MM);
 
-        $this->assertSame('1.234.567 mm', $this->distance->formatWithSymbol());
+        $this->assertSame('1 234 567 mm', $this->distance->formatWithSymbol());
     }
 
     /** @test */
@@ -182,11 +151,11 @@ class DistanceTest extends TestCase
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235 m', (string) $this->distance);
+        $this->assertSame('1 235 m', (string) $this->distance);
 
         $this->distance = $this->distance->setValue(-1234.567);
 
-        $this->assertSame('-1.235 m', (string) $this->distance);
+        $this->assertSame('-1 235 m', (string) $this->distance);
     }
 
     /* ------------------------------------------------------------------------------------------------

@@ -3,7 +3,6 @@
 use Arcanedev\Units\Bases\UnitMeasure;
 use Arcanedev\Units\Contracts\Measures\Weight as WeightContract;
 use Arcanedev\Units\Traits\Calculatable;
-use Illuminate\Support\Arr;
 
 /**
  * Class     Weight
@@ -32,14 +31,7 @@ class Weight extends UnitMeasure implements WeightContract
      */
     public function __construct($value = 0, $unit = self::KG, array $options = [])
     {
-        $this->setValue($value);
-        $this->setUnit($unit);
-        $this->setSymbols(Arr::get($options, 'symbols', []));
-        $this->setFormat(
-            Arr::get($options, 'decimals', 0),
-            Arr::get($options, 'separators.decimal', ','),
-            Arr::get($options, 'separators.thousands', '.')
-        );
+        $this->init($value, $unit, $options);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -47,11 +39,11 @@ class Weight extends UnitMeasure implements WeightContract
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the symbol's names.
+     * Get the default names.
      *
      * @return array
      */
-    public static function names()
+    public function defaultNames()
     {
         return array_combine(static::units(), [
             'ton',
@@ -59,20 +51,6 @@ class Weight extends UnitMeasure implements WeightContract
             'gram',
             'milligram',
         ]);
-    }
-
-    /**
-     * Get the symbol name.
-     *
-     * @param  string  $unit
-     *
-     * @return string
-     */
-    public static function getSymbolName($unit)
-    {
-        static::checkUnit($unit);
-
-        return Arr::get(static::names(), $unit);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -86,41 +64,11 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return self
+     * @return static
      */
     public static function make($value = 0, $unit = self::KG, array $options = [])
     {
-        return new static($value, $unit, $options);
-    }
-
-    /**
-     * Convert the weight to the given unit.
-     *
-     * @param  string  $to
-     *
-     * @return self
-     */
-    public function to($to)
-    {
-        if ($to === $this->unit()) return $this;
-
-        $value = static::convert($this->unit(), $to, $this->value());
-
-        return static::make($value, $to);
-    }
-
-    /**
-     * Convert the weight.
-     *
-     * @param  string     $from
-     * @param  string     $to
-     * @param  float|int  $value
-     *
-     * @return float|int
-     */
-    public static function convert($from, $to, $value)
-    {
-        return $value * static::getRatio($to, $from);
+        return parent::make($value, $unit, $options);
     }
 
     /* ------------------------------------------------------------------------------------------------
@@ -137,7 +85,7 @@ class Weight extends UnitMeasure implements WeightContract
      */
     public function addWeight($value, $unit = self::KG)
     {
-        return $this->add(self::make($value, $unit));
+        return $this->add(static::make($value, $unit));
     }
 
     /**

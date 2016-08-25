@@ -11,6 +11,33 @@ use Arcanedev\Units\Contracts\UnitMeasure;
 trait Calculatable
 {
     /* ------------------------------------------------------------------------------------------------
+     |  Getters & Setters
+     | ------------------------------------------------------------------------------------------------
+     */
+    /**
+     * Get the unit value.
+     *
+     * @return float|int
+     */
+    abstract public function value();
+
+    /**
+     * Set the unit value.
+     *
+     * @param  float|int  $value
+     *
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
+     */
+    abstract public function setValue($value);
+
+    /**
+     * Get the unit key.
+     *
+     * @return string
+     */
+    abstract public function unit();
+
+    /* ------------------------------------------------------------------------------------------------
      |  Main Functions
      | ------------------------------------------------------------------------------------------------
      */
@@ -65,7 +92,7 @@ trait Calculatable
      *
      * @param  float|int  $number
      *
-     * @return \Arcanedev\Units\Contracts\Measures\Weight
+     * @return \Arcanedev\Units\Contracts\UnitMeasure
      */
     public function divide($number)
     {

@@ -13,14 +13,14 @@ interface UnitMeasure
      | ------------------------------------------------------------------------------------------------
      */
     /**
-     * Get the weight value.
+     * Get the unit value.
      *
      * @return float|int
      */
     public function value();
 
     /**
-     * Set the weight value.
+     * Set the unit value.
      *
      * @param  float|int  $value
      *
@@ -36,14 +36,14 @@ interface UnitMeasure
     public static function units();
 
     /**
-     * Get the weight unit.
+     * Get the unit key.
      *
      * @return string
      */
     public function unit();
 
     /**
-     * Set the weight unit.
+     * Set the unit key.
      *
      * @param  string  $unit
      *
@@ -52,11 +52,20 @@ interface UnitMeasure
     public function setUnit($unit);
 
     /**
-     * Get the available units.
+     * Get the unit symbols.
      *
      * @return array
      */
     public function symbols();
+
+    /**
+     * Set the unit symbols.
+     *
+     * @param  array  $symbols
+     *
+     * @return static
+     */
+    public function setSymbols(array $symbols);
 
     /**
      * Get the symbol.
@@ -76,13 +85,46 @@ interface UnitMeasure
     public function setSymbol($unit, $symbol);
 
     /**
-     * Set the symbols.
+     * Get the unit names.
      *
-     * @param  array  $symbols
+     * @return array
+     */
+    public function names();
+
+    /**
+     * Set the unit names.
+     *
+     * @param  array  $names
      *
      * @return static
      */
-    public function setSymbols(array $symbols);
+    public function setNames(array $names);
+
+    /**
+     * Get the unit name.
+     *
+     * @return string
+     */
+    public function name();
+
+    /**
+     * Get the name by a given unit.
+     *
+     * @param  string  $unit
+     *
+     * @return string
+     */
+    public function getName($unit);
+
+    /**
+     * Set the unit name.
+     *
+     * @param  string  $unit
+     * @param  string  $name
+     *
+     * @return static
+     */
+    public function setName($unit, $name);
 
     /**
      * Set the format.
@@ -96,11 +138,22 @@ interface UnitMeasure
     public function setFormat($decimals = 0, $decimalSeparator = ',', $thousandsSeparator = '.');
 
     /**
-     * Convert the unit object to the given unit of measure.
+     * Convert the unit to the given unit key.
      *
      * @param  string  $to
      *
      * @return static
      */
     public function to($to);
+
+    /**
+     * Convert the unit.
+     *
+     * @param  string     $from
+     * @param  string     $to
+     * @param  float|int  $value
+     *
+     * @return float|int
+     */
+    public static function convert($from, $to, $value);
 }
