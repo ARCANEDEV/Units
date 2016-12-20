@@ -78,6 +78,21 @@ class UnitsManagerTest extends LaravelTestCase
     }
 
     /** @test */
+    public function it_can_be_instantiated_by_facade()
+    {
+
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Distance::class,
+            \Arcanedev\Units\Facades\Unit::driver('distance')
+        );
+
+        $this->assertInstanceOf(
+            \Arcanedev\Units\Measures\Distance::class,
+            \Arcanedev\Units\Facades\Unit::distance()
+        );
+    }
+
+    /** @test */
     public function it_can_instantiate_weight_unit()
     {
         $this->assertInstanceOf(
