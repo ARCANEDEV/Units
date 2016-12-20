@@ -1,7 +1,6 @@
 # Units [![Packagist License][badge_license]](LICENSE.md) [![For PHP][badge_php]][link-github-repo] [![For Laravel 5][badge_laravel]][link-github-repo]
 
 [![Travis Status][badge_build]][link-travis]
-[![HHVM Status][badge_hhvm]][link-hhvm]
 [![Coverage Status][badge_coverage]][link-scrutinizer]
 [![Scrutinizer Code Quality][badge_quality]][link-scrutinizer]
 [![SensioLabs Insight][badge_insight]][link-insight]
@@ -52,7 +51,6 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [badge_laravel]:      https://img.shields.io/badge/Laravel%20Supported-5.1|5.2|5.3-orange.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/units.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/Units.svg?style=flat-square
-[badge_hhvm]:         https://img.shields.io/hhvm/arcanedev/units.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Units.svg?style=flat-square
 [badge_quality]:      https://img.shields.io/scrutinizer/g/ARCANEDEV/Units.svg?style=flat-square
 [badge_insight]:      https://img.shields.io/sensiolabs/i/6034af21-a8e1-4831-9b9d-238670d852fb.svg?style=flat-square
@@ -67,6 +65,5 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 [link-contributors]:  https://github.com/ARCANEDEV/Units/graphs/contributors
 [link-packagist]:     https://packagist.org/packages/arcanedev/units
 [link-travis]:        https://travis-ci.org/ARCANEDEV/Units
-[link-hhvm]:          http://hhvm.h4cc.de/package/arcanedev/units
 [link-scrutinizer]:   https://scrutinizer-ci.com/g/ARCANEDEV/Units/?branch=master
 [link-insight]:       https://insight.sensiolabs.com/projects/6034af21-a8e1-4831-9b9d-238670d852fb
