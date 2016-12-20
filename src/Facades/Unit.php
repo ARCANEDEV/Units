@@ -15,5 +15,8 @@ class Unit extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'arcanedev.units.manager'; }
+    protected static function getFacadeAccessor()
+    {
+        return \Arcanedev\Units\Contracts\UnitsManager::class;
+    }
 }

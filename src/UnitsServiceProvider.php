@@ -73,8 +73,8 @@ class UnitsServiceProvider extends PackageServiceProvider
     public function provides()
     {
         return [
-            'arcanedev.units.manager',
             Contracts\UnitsManager::class,
+            'arcanedev.units.manager',
         ];
     }
 
@@ -87,10 +87,7 @@ class UnitsServiceProvider extends PackageServiceProvider
      */
     private function registerManager()
     {
-        $this->singleton('arcanedev.units.manager', function ($app) {
-            return new UnitsManager($app);
-        });
-
-        $this->bind(Contracts\UnitsManager::class, 'arcanedev.units.manager');
+        $this->singleton(Contracts\UnitsManager::class, UnitsManager::class);
+        $this->singleton('arcanedev.units.manager', Contracts\UnitsManager::class);
     }
 }

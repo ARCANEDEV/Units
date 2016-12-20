@@ -59,8 +59,8 @@ class UnitsServiceProviderTest extends LaravelTestCase
     public function it_can_provides()
     {
         $expected = [
-            'arcanedev.units.manager',
             \Arcanedev\Units\Contracts\UnitsManager::class,
+            'arcanedev.units.manager',
         ];
 
         $this->assertSame($expected, $this->provider->provides());
