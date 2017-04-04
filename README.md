@@ -20,7 +20,7 @@ Units package that allows you to manage multiple units of measure in easy way.
   * Easy setup &amp; configuration.
   * Well documented &amp; IDE Friendly.
   * Well tested with maximum code quality.
-  * Laravel `5.1 | 5.2 | 5.3` are supported.
+  * Laravel `5.1 | 5.2 | 5.3 | 5.4` are supported.
   * Made with :heart: &amp; :coffee:.
 
 ## Table of contents
@@ -29,10 +29,6 @@ Units package that allows you to manage multiple units of measure in easy way.
 2. [Installation and Setup](_docs/2.Installation-and-Setup.md)
 3. [Configuration](_docs/3.Configuration.md)
 4. [Usage](_docs/4.Usage.md)
-
-## TODOS
-
-  - [ ] Documentation.
 
 ## Contribution
 
@@ -48,7 +44,7 @@ If you discover any security related issues, please email arcanedev.maroc@gmail.
 - [All Contributors][link-contributors]
 
 [badge_php]:          https://img.shields.io/badge/PHP-Framework%20agnostic-4F5B93.svg?style=flat-square
-[badge_laravel]:      https://img.shields.io/badge/Laravel%20Supported-5.1|5.2|5.3-orange.svg?style=flat-square
+[badge_laravel]:      https://img.shields.io/badge/Laravel%20Supported-5.1%20to%205.4-orange.svg?style=flat-square
 [badge_license]:      https://img.shields.io/packagist/l/arcanedev/units.svg?style=flat-square
 [badge_build]:        https://img.shields.io/travis/ARCANEDEV/Units.svg?style=flat-square
 [badge_coverage]:     https://img.shields.io/scrutinizer/coverage/g/ARCANEDEV/Units.svg?style=flat-square
