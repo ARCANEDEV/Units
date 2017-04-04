@@ -202,7 +202,7 @@ class FileSizeTest extends LaravelTestCase
         $values = [1, 10, 100, 1000, 0.1, 0.01];
 
         foreach ($values as $value) {
-            $this->fileSize->addDistance($value);
+            $this->fileSize->addSize($value);
             $total += $value;
 
             $this->assertSame($total, $this->fileSize->value());
@@ -212,7 +212,7 @@ class FileSizeTest extends LaravelTestCase
     /** @test */
     public function it_can_add_negative_value()
     {
-        $this->fileSize->addDistance(-1);
+        $this->fileSize->addSize(-1);
 
         $this->assertSame(-1, $this->fileSize->value());
     }

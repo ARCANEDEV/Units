@@ -17,7 +17,7 @@ class UnitsManagerTest extends LaravelTestCase
     protected $manager;
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
     public function setUp()

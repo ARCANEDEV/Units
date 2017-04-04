@@ -10,9 +10,9 @@ use Orchestra\Testbench\TestCase as BaseTestCase;
  */
 abstract class LaravelTestCase extends BaseTestCase
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     public function setUp()
     {
@@ -21,9 +21,12 @@ abstract class LaravelTestCase extends BaseTestCase
         $this->app->loadDeferredProviders();
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Laravel Functions
-     | ------------------------------------------------------------------------------------------------
+    /**
+     * Get package providers.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
      */
     protected function getPackageProviders($app)
     {
@@ -32,14 +35,25 @@ abstract class LaravelTestCase extends BaseTestCase
         ];
     }
 
+    /**
+     * Get package aliases.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     *
+     * @return array
+     */
     protected function getPackageAliases($app)
     {
         return [
-            \Arcanedev\Units\Facades\Unit::class,
+            'Unit' => \Arcanedev\Units\Facades\Unit::class,
         ];
     }
 
-
+    /**
+     * Define environment setup.
+     *
+     * @param  \Illuminate\Foundation\Application  $app
+     */
     protected function getEnvironmentSetUp($app)
     {
         //

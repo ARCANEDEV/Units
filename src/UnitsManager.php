@@ -20,7 +20,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the distance unit driver.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     protected function createDistanceDriver()
     {
@@ -30,7 +30,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the distance unit instance.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     public function distance()
     {
@@ -40,7 +40,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the file size unit driver.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     protected function createFileSizeDriver()
     {
@@ -50,7 +50,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the file size unit instance.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     public function fileSize()
     {
@@ -60,7 +60,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the liquid volume unit driver.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     protected function createLiquidVolumeDriver()
     {
@@ -70,7 +70,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the liquid volume unit instance.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     public function liquidVolume()
     {
@@ -80,7 +80,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the weight unit driver.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     protected function createWeightDriver()
     {
@@ -90,7 +90,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
     /**
      * Create the weight unit instance.
      *
-     * @return Bases\UnitMeasure
+     * @return \Arcanedev\Units\Bases\UnitMeasure
      */
     public function weight()
     {
@@ -107,9 +107,9 @@ class UnitsManager extends Manager implements UnitsManagerContract
         throw new InvalidArgumentException('No unit of measurement was specified.');
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Build the unit of measurement.

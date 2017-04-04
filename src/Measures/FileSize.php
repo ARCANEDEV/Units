@@ -88,7 +88,7 @@ class FileSize extends UnitMeasure implements FileSizeContract
      *
      * @return \Arcanedev\Units\Contracts\Measures\FileSize
      */
-    public function addDistance($value, $unit = self::B)
+    public function addSize($value, $unit = self::B)
     {
         return $this->add(static::make($value, $unit));
     }

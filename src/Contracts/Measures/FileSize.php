@@ -36,4 +36,28 @@ interface FileSize
      * @return static
      */
     public static function make($value = 0, $unit = self::B, array $options = []);
+
+    /* -----------------------------------------------------------------
+     |  Calculation Methods
+     | -----------------------------------------------------------------
+     */
+    /**
+     * Add the file size.
+     *
+     * @param  float|int  $value
+     * @param  string     $unit
+     *
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize
+     */
+    public function addSize($value, $unit = self::B);
+
+    /**
+     * Sub the file size.
+     *
+     * @param  float|int  $value
+     * @param  string     $unit
+     *
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize
+     */
+    public function subSize($value, $unit = self::B);
 }

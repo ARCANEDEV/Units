@@ -1,5 +1,6 @@
 <?php namespace Arcanedev\Units\Facades;
 
+use Arcanedev\Units\Contracts\UnitsManager;
 use Illuminate\Support\Facades\Facade;
 
 /**
@@ -15,8 +16,5 @@ class Unit extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor()
-    {
-        return \Arcanedev\Units\Contracts\UnitsManager::class;
-    }
+    protected static function getFacadeAccessor() { return UnitsManager::class; }
 }

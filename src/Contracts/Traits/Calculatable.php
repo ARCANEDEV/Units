@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\Units\Contracts\Traits;
+
 use Arcanedev\Units\Contracts\UnitMeasure;
 
 /**
@@ -9,9 +10,9 @@ use Arcanedev\Units\Contracts\UnitMeasure;
  */
 interface Calculatable
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Add the unit instance.
