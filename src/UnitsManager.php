@@ -1,8 +1,8 @@
 <?php namespace Arcanedev\Units;
 
-use Arcanedev\Support\Manager;
 use Arcanedev\Units\Contracts\UnitsManager as UnitsManagerContract;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Manager;
 use InvalidArgumentException;
 
 /**
@@ -13,10 +13,20 @@ use InvalidArgumentException;
  */
 class UnitsManager extends Manager implements UnitsManagerContract
 {
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
+    /**
+     * Create the distance unit driver.
+     *
+     * @return Bases\UnitMeasure
+     */
+    protected function createDistanceDriver()
+    {
+        return $this->distance();
+    }
+
     /**
      * Create the distance unit instance.
      *
@@ -28,33 +38,23 @@ class UnitsManager extends Manager implements UnitsManagerContract
     }
 
     /**
-     * Create the liquid volume unit instance.
+     * Create the file size unit driver.
      *
      * @return Bases\UnitMeasure
      */
-    public function liquidVolume()
+    protected function createFileSizeDriver()
     {
-        return $this->buildUnit('liquid-volume', Measures\LiquidVolume::class);
+        return $this->fileSize();
     }
 
     /**
-     * Create the weight unit instance.
+     * Create the file size unit instance.
      *
      * @return Bases\UnitMeasure
      */
-    public function weight()
+    public function fileSize()
     {
-        return $this->buildUnit('weight', Measures\Weight::class);
-    }
-
-    /**
-     * Create the distance unit driver.
-     *
-     * @return Bases\UnitMeasure
-     */
-    protected function createDistanceDriver()
-    {
-        return $this->distance();
+        return $this->buildUnit('file-size', Measures\FileSize::class);
     }
 
     /**
@@ -68,6 +68,16 @@ class UnitsManager extends Manager implements UnitsManagerContract
     }
 
     /**
+     * Create the liquid volume unit instance.
+     *
+     * @return Bases\UnitMeasure
+     */
+    public function liquidVolume()
+    {
+        return $this->buildUnit('liquid-volume', Measures\LiquidVolume::class);
+    }
+
+    /**
      * Create the weight unit driver.
      *
      * @return Bases\UnitMeasure
@@ -75,6 +85,16 @@ class UnitsManager extends Manager implements UnitsManagerContract
     protected function createWeightDriver()
     {
         return $this->weight();
+    }
+
+    /**
+     * Create the weight unit instance.
+     *
+     * @return Bases\UnitMeasure
+     */
+    public function weight()
+    {
+        return $this->buildUnit('weight', Measures\Weight::class);
     }
 
     /**

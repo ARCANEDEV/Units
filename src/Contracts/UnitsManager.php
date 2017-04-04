@@ -20,6 +20,13 @@ interface UnitsManager
     public function distance();
 
     /**
+     * Create the file size unit instance.
+     *
+     * @return \Arcanedev\Units\Bases\UnitMeasure
+     */
+    public function fileSize();
+
+    /**
      * Create the liquid volume unit instance.
      *
      * @return \Arcanedev\Units\Bases\UnitMeasure
