@@ -1,8 +1,8 @@
 <?php namespace Arcanedev\Units;
 
-use Arcanedev\Support\Manager;
 use Arcanedev\Units\Contracts\UnitsManager as UnitsManagerContract;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Manager;
 use InvalidArgumentException;
 
 /**
