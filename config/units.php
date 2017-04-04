@@ -1,13 +1,14 @@
 <?php
 
 use Arcanedev\Units\Contracts\Measures\Distance;
+use Arcanedev\Units\Contracts\Measures\FileSize;
 use Arcanedev\Units\Contracts\Measures\LiquidVolume;
 use Arcanedev\Units\Contracts\Measures\Weight;
 
 return [
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Distance Unit
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     'distance'      => [
         'default' => Distance::M,
@@ -36,12 +37,51 @@ return [
         ],
     ],
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  File Size Unit
+     | -----------------------------------------------------------------
+     */
+    'file-size'     => [
+        'default' => FileSize::B,
+
+        'symbols' => [
+            FileSize::YB => 'yb',
+            FileSize::ZB => 'zb',
+            FileSize::EB => 'eb',
+            FileSize::PB => 'pb',
+            FileSize::TB => 'tb',
+            FileSize::GB => 'gb',
+            FileSize::MB => 'mb',
+            FileSize::KB => 'kb',
+            FileSize::B  => 'b',
+        ],
+
+        'names'   => [
+            FileSize::YB => 'yottabyte',
+            FileSize::ZB => 'zettabyte',
+            FileSize::EB => 'exabyte',
+            FileSize::PB => 'petabyte',
+            FileSize::TB => 'terabyte',
+            FileSize::GB => 'gigabyte',
+            FileSize::MB => 'megabyte',
+            FileSize::KB => 'kilobyte',
+            FileSize::B  => 'b',
+        ],
+
+        'format'  => [
+            'decimals'            => 0,
+            'decimal-separator'   => ',',
+            'thousands-separator' => ' ',
+        ],
+    ],
+
+    /* -----------------------------------------------------------------
      |  Liquid Volume Unit
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     'liquid-volume' => [
         'default' => LiquidVolume::L,
+
         'symbols' => [
             LiquidVolume::KL  => 'kl',
             LiquidVolume::HL  => 'hl',
@@ -51,6 +91,7 @@ return [
             LiquidVolume::CL  => 'cl',
             LiquidVolume::ML  => 'ml',
         ],
+
         'names'   => [
             LiquidVolume::KL  => 'Kilolitre',
             LiquidVolume::HL  => 'Hectolitre',
@@ -60,6 +101,7 @@ return [
             LiquidVolume::CL  => 'Centilitre',
             LiquidVolume::ML  => 'Millilitre',
         ],
+
         'format'  => [
             'decimals'            => 0,
             'decimal-separator'   => ',',
@@ -67,9 +109,9 @@ return [
         ],
     ],
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Weight Unit
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     'weight'        => [
         'default' => Weight::KG,

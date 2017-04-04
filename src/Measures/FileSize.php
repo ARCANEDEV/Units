@@ -1,38 +1,22 @@
 <?php namespace Arcanedev\Units\Measures;
 
 use Arcanedev\Units\Bases\UnitMeasure;
-use Arcanedev\Units\Contracts\Measures\LiquidVolume as LiquidVolumeContract;
+use Arcanedev\Units\Contracts\Measures\FileSize as FileSizeContract;
 use Arcanedev\Units\Traits\Calculatable;
 
 /**
- * Class     LiquidVolume
+ * Class     FileSize
  *
  * @package  Arcanedev\Units\Measures
  * @author   ARCANEDEV <arcanedev.maroc@gmail.com>
  */
-class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
+class FileSize extends UnitMeasure implements FileSizeContract
 {
     /* -----------------------------------------------------------------
      |  Traits
      | -----------------------------------------------------------------
      */
     use Calculatable;
-
-    /* -----------------------------------------------------------------
-     |  Constructor
-     | -----------------------------------------------------------------
-     */
-    /**
-     * Volume constructor.
-     *
-     * @param  float|int  $value
-     * @param  string     $unit
-     * @param  array      $options
-     */
-    public function __construct($value = 0, $unit = self::L, array $options = [])
-    {
-        $this->init($value, $unit, $options);
-    }
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
@@ -46,22 +30,40 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
     public function defaultNames()
     {
         return array_combine(static::units(), [
-            'kilolitre',
-            'hectolitre',
-            'decalitre',
-            'litre',
-            'decilitre',
-            'centilitre',
-            'millilitre',
+            'yotta',
+            'zetta',
+            'exa',
+            'peta',
+            'tera',
+            'gigabyte',
+            'megabyte',
+            'kilobyte',
+            'byte',
         ]);
     }
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Constructor
      | -----------------------------------------------------------------
      */
     /**
-     * Make a volume instance.
+     * Distance constructor.
+     *
+     * @param  float|int  $value
+     * @param  string     $unit
+     * @param  array      $options
+     */
+    public function __construct($value = 0, $unit = self::B, array $options = [])
+    {
+        $this->init($value, $unit, $options);
+    }
+
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
+     */
+    /**
+     * Make a distance instance.
      *
      * @param  float|int  $value
      * @param  string     $unit
@@ -69,7 +71,7 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      *
      * @return static
      */
-    public static function make($value = 0, $unit = self::L, array $options = [])
+    public static function make($value = 0, $unit = self::B, array $options = [])
     {
         return parent::make($value, $unit, $options);
     }
@@ -79,27 +81,27 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      | -----------------------------------------------------------------
      */
     /**
-     * Add the volume.
+     * Add the file size.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize
      */
-    public function addVolume($value, $unit = self::L)
+    public function addSize($value, $unit = self::B)
     {
         return $this->add(static::make($value, $unit));
     }
 
     /**
-     * Sub the volume.
+     * Sub the file size.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\LiquidVolume
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize
      */
-    public function subVolume($value, $unit = self::L)
+    public function subSize($value, $unit = self::B)
     {
         return $this->sub(static::make($value, $unit));
     }
@@ -109,41 +111,23 @@ class LiquidVolume extends UnitMeasure implements LiquidVolumeContract
      | -----------------------------------------------------------------
      */
     /**
-     * Get the volume convert ratio.
-     *
-     * @param  string  $to
-     * @param  string  $from
-     *
-     * @return float|int
-     */
-    protected static function getRatio($to, $from)
-    {
-        static::checkUnit($from);
-        static::checkUnit($to);
-
-        if ($to === $from) return 1;
-
-        $ratios = static::getRatios();
-
-        return $ratios[$to] / $ratios[$from];
-    }
-
-    /**
-     * Get all the volume ratios.
+     * Get all the distance ratios.
      *
      * @return array
      */
     protected static function getRatios()
     {
-        $rate   = 10;
+        $rate   = 1024;
         $ratios = [
-            static::KL  => 0,
-            static::HL  => 1,
-            static::DAL => 2,
-            static::L   => 3,
-            static::DL  => 4,
-            static::CL  => 5,
-            static::ML  => 6,
+            FileSize::YB => 0,
+            FileSize::ZB => 1,
+            FileSize::EB => 2,
+            FileSize::PB => 3,
+            FileSize::TB => 4,
+            FileSize::GB => 5,
+            FileSize::MB => 6,
+            FileSize::KB => 7,
+            FileSize::B  => 8,
         ];
 
         return array_map(function ($ratio) use ($rate) {

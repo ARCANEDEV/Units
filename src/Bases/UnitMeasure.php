@@ -251,7 +251,7 @@ abstract class UnitMeasure implements UnitMeasureContract
      *
      * @return array
      */
-    abstract protected function defaultNames();
+    abstract public function defaultNames();
 
     /**
      * Set the unit names.

@@ -10,9 +10,9 @@ use Arcanedev\Support\PackageServiceProvider;
  */
 class UnitsServiceProvider extends PackageServiceProvider
 {
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Properties
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * Package name.
@@ -28,9 +28,9 @@ class UnitsServiceProvider extends PackageServiceProvider
      */
     protected $defer = true;
 
-    /* ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
      |  Getters & Setters
-     | ------------------------------------------------------------------------------------------------
+     | -----------------------------------------------------------------
      */
     /**
      * Get the base path of the package.
@@ -42,15 +42,17 @@ class UnitsServiceProvider extends PackageServiceProvider
         return dirname(__DIR__);
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Main Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Main Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register the service provider.
      */
     public function register()
     {
+        parent::register();
+
         $this->registerConfig();
         $this->registerManager();
     }
@@ -74,20 +76,20 @@ class UnitsServiceProvider extends PackageServiceProvider
     {
         return [
             Contracts\UnitsManager::class,
-            'arcanedev.units.manager',
         ];
     }
 
-    /* ------------------------------------------------------------------------------------------------
-     |  Other Functions
-     | ------------------------------------------------------------------------------------------------
+    /* -----------------------------------------------------------------
+     |  Other Methods
+     | -----------------------------------------------------------------
      */
     /**
      * Register the Units Manager.
      */
     private function registerManager()
     {
-        $this->singleton(Contracts\UnitsManager::class, UnitsManager::class);
-        $this->singleton('arcanedev.units.manager', Contracts\UnitsManager::class);
+        $this->singleton(Contracts\UnitsManager::class, function ($app) {
+            return new UnitsManager($app);
+        });
     }
 }
