@@ -15,6 +15,7 @@ class LiquidVolumeTest extends TestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\Contracts\Measures\LiquidVolume */
     private $volume;
 
@@ -22,6 +23,7 @@ class LiquidVolumeTest extends TestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -40,6 +42,7 @@ class LiquidVolumeTest extends TestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -50,13 +53,13 @@ class LiquidVolumeTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->volume);
+            static::assertInstanceOf($expected, $this->volume);
         }
 
-        $this->assertSame(0, $this->volume->value());
-        $this->assertSame(LiquidVolume::L, $this->volume->unit());
-        $this->assertSame('l', $this->volume->symbol());
-        $this->assertSame('litre', $this->volume->name());
+        static::assertSame(0, $this->volume->value());
+        static::assertSame(LiquidVolume::L, $this->volume->unit());
+        static::assertSame('l', $this->volume->symbol());
+        static::assertSame('litre', $this->volume->name());
     }
 
     /** @test */
@@ -70,11 +73,11 @@ class LiquidVolumeTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->volume);
+            static::assertInstanceOf($expected, $this->volume);
         }
 
-        $this->assertSame(0, $this->volume->value());
-        $this->assertSame(LiquidVolume::L, $this->volume->unit());
+        static::assertSame(0, $this->volume->value());
+        static::assertSame(LiquidVolume::L, $this->volume->unit());
     }
 
     /** @test */
@@ -82,8 +85,8 @@ class LiquidVolumeTest extends TestCase
     {
         $units = LiquidVolume::units();
 
-        $this->assertCount(7, $units);
-        $this->assertSame([
+        static::assertCount(7, $units);
+        static::assertSame([
             LiquidVolume::KL,
             LiquidVolume::HL,
             LiquidVolume::DAL,
@@ -99,15 +102,15 @@ class LiquidVolumeTest extends TestCase
     {
         $names = $this->volume->names();
 
-        $this->assertCount(7, $names);
+        static::assertCount(7, $names);
 
         foreach (LiquidVolume::units() as $unit) {
-            $this->assertArrayHasKey($unit, $names);
+            static::assertArrayHasKey($unit, $names);
 
             $name = $names[$unit];
 
-            $this->assertNotSame($unit, $name);
-            $this->assertSame($this->volume->getName($unit), $name);
+            static::assertNotSame($unit, $name);
+            static::assertSame($this->volume->getName($unit), $name);
         }
     }
 
@@ -117,8 +120,8 @@ class LiquidVolumeTest extends TestCase
         $units = LiquidVolume::units();
 
         foreach ($this->volume->symbols() as $unit => $symbol) {
-            $this->assertTrue(in_array($unit, $units));
-            $this->assertSame($unit, $symbol);
+            static::assertTrue(in_array($unit, $units));
+            static::assertSame($unit, $symbol);
         }
     }
 
@@ -130,8 +133,8 @@ class LiquidVolumeTest extends TestCase
         foreach ($values as $value) {
             $converted = LiquidVolume::make($value, LiquidVolume::KL)->to(LiquidVolume::L);
 
-            $this->assertSame(LiquidVolume::L,   $converted->unit());
-            $this->assertSame($value * 1000, $converted->value());
+            static::assertSame(LiquidVolume::L,   $converted->unit());
+            static::assertSame($value * 1000, $converted->value());
         }
     }
 
@@ -140,53 +143,53 @@ class LiquidVolumeTest extends TestCase
     {
         $converted = $this->volume->setValue(1)->to($this->volume->unit());
 
-        $this->assertSame($this->volume->unit(),  $converted->unit());
-        $this->assertSame($this->volume->value(), $converted->value());
+        static::assertSame($this->volume->unit(),  $converted->unit());
+        static::assertSame($this->volume->value(), $converted->value());
     }
 
     /** @test */
     public function it_can_format()
     {
-        $this->assertSame('0', $this->volume->format());
+        static::assertSame('0', $this->volume->format());
 
         $this->volume->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->volume->format());
-        $this->assertSame('1.234,567', $this->volume->format(3));
+        static::assertSame('1.235', $this->volume->format());
+        static::assertSame('1.234,567', $this->volume->format(3));
     }
 
     /** @test */
     public function it_can_format_with_symbol()
     {
-        $this->assertSame('0 l', $this->volume->formatWithSymbol());
+        static::assertSame('0 l', $this->volume->formatWithSymbol());
 
         $this->volume->setValue(1234.567);
 
-        $this->assertSame('1.235 l',     $this->volume->formatWithSymbol());
-        $this->assertSame('1.234,567 l', $this->volume->formatWithSymbol(3));
+        static::assertSame('1.235 l',     $this->volume->formatWithSymbol());
+        static::assertSame('1.234,567 l', $this->volume->formatWithSymbol(3));
 
         $this->volume = $this->volume->to(LiquidVolume::KL);
 
-        $this->assertSame('1 kl',     $this->volume->formatWithSymbol());
-        $this->assertSame('1,235 kl', $this->volume->formatWithSymbol(3));
+        static::assertSame('1 kl',     $this->volume->formatWithSymbol());
+        static::assertSame('1,235 kl', $this->volume->formatWithSymbol(3));
 
         $this->volume = $this->volume->to(LiquidVolume::ML);
 
-        $this->assertSame('1.234.567 ml', $this->volume->formatWithSymbol());
+        static::assertSame('1.234.567 ml', $this->volume->formatWithSymbol());
     }
 
     /** @test */
     public function it_can_format_with_symbol_when_it_casts_to_string()
     {
-        $this->assertSame('0 l', (string) $this->volume);
+        static::assertSame('0 l', (string) $this->volume);
 
         $this->volume->setValue(1234.567);
 
-        $this->assertSame('1.235 l', (string) $this->volume);
+        static::assertSame('1.235 l', (string) $this->volume);
 
         $this->volume = $this->volume->setValue(-1234.567);
 
-        $this->assertSame('-1.235 l', (string) $this->volume);
+        static::assertSame('-1.235 l', (string) $this->volume);
     }
 
     /* -----------------------------------------------------------------
@@ -203,7 +206,7 @@ class LiquidVolumeTest extends TestCase
             $this->volume->addVolume($value);
             $total += $value;
 
-            $this->assertSame($total, $this->volume->value());
+            static::assertSame($total, $this->volume->value());
         }
     }
 
@@ -212,7 +215,7 @@ class LiquidVolumeTest extends TestCase
     {
         $this->volume->addVolume(-1);
 
-        $this->assertSame(-1, $this->volume->value());
+        static::assertSame(-1, $this->volume->value());
     }
 
     /** @test */
@@ -228,7 +231,7 @@ class LiquidVolumeTest extends TestCase
 
             $total += $w->value();
 
-            $this->assertSame($total, $this->volume->value());
+            static::assertSame($total, $this->volume->value());
         }
     }
 
@@ -239,7 +242,7 @@ class LiquidVolumeTest extends TestCase
 
         $this->volume->add($dist);
 
-        $this->assertSame(1000, $this->volume->value());
+        static::assertSame(1000, $this->volume->value());
     }
 
     /** @test */
@@ -247,11 +250,11 @@ class LiquidVolumeTest extends TestCase
     {
         $this->volume->subVolume(1);
 
-        $this->assertSame(-1, $this->volume->value());
+        static::assertSame(-1, $this->volume->value());
 
         $this->volume->subVolume(99);
 
-        $this->assertSame(-100, $this->volume->value());
+        static::assertSame(-100, $this->volume->value());
     }
 
     /** @test */
@@ -259,11 +262,11 @@ class LiquidVolumeTest extends TestCase
     {
         $this->volume->subVolume(-1);
 
-        $this->assertSame(1, $this->volume->value());
+        static::assertSame(1, $this->volume->value());
 
         $this->volume->subVolume(-99);
 
-        $this->assertSame(100, $this->volume->value());
+        static::assertSame(100, $this->volume->value());
     }
 
     /** @test */
@@ -277,7 +280,7 @@ class LiquidVolumeTest extends TestCase
         foreach ($values as $value) {
             $this->volume->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->volume->value());
+            static::assertSame($total, $this->volume->value());
         }
     }
 
@@ -292,7 +295,7 @@ class LiquidVolumeTest extends TestCase
         foreach ($values as $value) {
             $this->volume->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->volume->value());
+            static::assertSame($total, $this->volume->value());
         }
     }
 
@@ -307,7 +310,7 @@ class LiquidVolumeTest extends TestCase
         foreach ($values as $value) {
             $this->volume->divide($value);
             $total /= $value;
-            $this->assertSame($total, $this->volume->value());
+            static::assertSame($total, $this->volume->value());
         }
     }
 
@@ -329,7 +332,7 @@ class LiquidVolumeTest extends TestCase
             $this->volume->divide(0);
         }
         catch (\Exception $e) {
-            $this->assertEquals('Division by zero', $e->getMessage());
+            static::assertEquals('Division by zero', $e->getMessage());
         }
     }
 }

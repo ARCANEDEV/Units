@@ -16,12 +16,14 @@ class FileSize extends UnitMeasure implements FileSizeContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Calculatable;
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the default names.
      *
@@ -46,6 +48,7 @@ class FileSize extends UnitMeasure implements FileSizeContract
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Distance constructor.
      *
@@ -55,13 +58,14 @@ class FileSize extends UnitMeasure implements FileSizeContract
      */
     public function __construct($value = 0, $unit = self::B, array $options = [])
     {
-        $this->init($value, $unit, $options);
+        parent::__construct($value, $unit, $options);
     }
 
     /* -----------------------------------------------------------------
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a distance instance.
      *
@@ -69,7 +73,7 @@ class FileSize extends UnitMeasure implements FileSizeContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return static
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public static function make($value = 0, $unit = self::B, array $options = [])
     {
@@ -80,13 +84,14 @@ class FileSize extends UnitMeasure implements FileSizeContract
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the file size.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\FileSize
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function addSize($value, $unit = self::B)
     {
@@ -99,7 +104,7 @@ class FileSize extends UnitMeasure implements FileSizeContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\FileSize
+     * @return \Arcanedev\Units\Contracts\Measures\FileSize|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function subSize($value, $unit = self::B)
     {
@@ -110,6 +115,7 @@ class FileSize extends UnitMeasure implements FileSizeContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get all the distance ratios.
      *

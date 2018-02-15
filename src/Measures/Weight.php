@@ -16,12 +16,14 @@ class Weight extends UnitMeasure implements WeightContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Calculatable;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Weight constructor.
      *
@@ -31,13 +33,14 @@ class Weight extends UnitMeasure implements WeightContract
      */
     public function __construct($value = 0, $unit = self::KG, array $options = [])
     {
-        $this->init($value, $unit, $options);
+        parent::__construct($value, $unit, $options);
     }
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the default names.
      *
@@ -57,6 +60,7 @@ class Weight extends UnitMeasure implements WeightContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a weight instance.
      *
@@ -64,7 +68,7 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return static
+     * @return \Arcanedev\Units\Contracts\Measures\Weight|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public static function make($value = 0, $unit = self::KG, array $options = [])
     {
@@ -75,13 +79,14 @@ class Weight extends UnitMeasure implements WeightContract
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the weight.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return self
+     * @return \Arcanedev\Units\Contracts\Measures\Weight|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function addWeight($value, $unit = self::KG)
     {
@@ -94,7 +99,7 @@ class Weight extends UnitMeasure implements WeightContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return self
+     * @return \Arcanedev\Units\Contracts\Measures\Weight|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function subWeight($value, $unit = self::KG)
     {
@@ -105,6 +110,7 @@ class Weight extends UnitMeasure implements WeightContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the weight convert ratio.
      *

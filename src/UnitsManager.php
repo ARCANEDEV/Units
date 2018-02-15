@@ -17,6 +17,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Create the distance unit driver.
      *
@@ -111,6 +112,7 @@ class UnitsManager extends Manager implements UnitsManagerContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Build the unit of measurement.
      *

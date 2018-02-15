@@ -15,6 +15,7 @@ class UnitsServiceProviderTest extends LaravelTestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\UnitsServiceProvider */
     private $provider;
 
@@ -22,6 +23,7 @@ class UnitsServiceProviderTest extends LaravelTestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -40,6 +42,7 @@ class UnitsServiceProviderTest extends LaravelTestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -51,7 +54,7 @@ class UnitsServiceProviderTest extends LaravelTestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->provider);
+            static::assertInstanceOf($expected, $this->provider);
         }
     }
 
@@ -62,6 +65,6 @@ class UnitsServiceProviderTest extends LaravelTestCase
             \Arcanedev\Units\Contracts\UnitsManager::class,
         ];
 
-        $this->assertSame($expected, $this->provider->provides());
+        static::assertSame($expected, $this->provider->provides());
     }
 }

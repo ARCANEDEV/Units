@@ -16,12 +16,14 @@ class Distance extends UnitMeasure implements DistanceContract
      |  Traits
      | -----------------------------------------------------------------
      */
+
     use Calculatable;
 
     /* -----------------------------------------------------------------
      |  Constructor
      | -----------------------------------------------------------------
      */
+
     /**
      * Distance constructor.
      *
@@ -31,13 +33,14 @@ class Distance extends UnitMeasure implements DistanceContract
      */
     public function __construct($value = 0, $unit = self::M, array $options = [])
     {
-        $this->init($value, $unit, $options);
+        parent::__construct($value, $unit, $options);
     }
 
     /* -----------------------------------------------------------------
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the default names.
      *
@@ -60,6 +63,7 @@ class Distance extends UnitMeasure implements DistanceContract
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a distance instance.
      *
@@ -67,7 +71,7 @@ class Distance extends UnitMeasure implements DistanceContract
      * @param  string     $unit
      * @param  array      $options
      *
-     * @return static
+     * @return \Arcanedev\Units\Contracts\Measures\Distance|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public static function make($value = 0, $unit = self::M, array $options = [])
     {
@@ -78,13 +82,14 @@ class Distance extends UnitMeasure implements DistanceContract
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the distance.
      *
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function addDistance($value, $unit = self::M)
     {
@@ -97,7 +102,7 @@ class Distance extends UnitMeasure implements DistanceContract
      * @param  float|int  $value
      * @param  string     $unit
      *
-     * @return \Arcanedev\Units\Contracts\Measures\Distance
+     * @return \Arcanedev\Units\Contracts\Measures\Distance|\Arcanedev\Units\Contracts\UnitMeasure
      */
     public function subDistance($value, $unit = self::M)
     {
@@ -108,6 +113,7 @@ class Distance extends UnitMeasure implements DistanceContract
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Get all the distance ratios.
      *

@@ -15,6 +15,7 @@ class WeightTest extends TestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\Contracts\Measures\Weight */
     private $weight;
 
@@ -22,6 +23,7 @@ class WeightTest extends TestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -50,13 +52,13 @@ class WeightTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->weight);
+            static::assertInstanceOf($expected, $this->weight);
         }
 
-        $this->assertSame(0, $this->weight->value());
-        $this->assertSame(Weight::KG, $this->weight->unit());
-        $this->assertSame('kg', $this->weight->symbol());
-        $this->assertSame('kilogram', $this->weight->name());
+        static::assertSame(0, $this->weight->value());
+        static::assertSame(Weight::KG, $this->weight->unit());
+        static::assertSame('kg', $this->weight->symbol());
+        static::assertSame('kilogram', $this->weight->name());
     }
 
     /** @test */
@@ -69,11 +71,11 @@ class WeightTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->weight);
+            static::assertInstanceOf($expected, $this->weight);
         }
 
-        $this->assertSame(0, $this->weight->value());
-        $this->assertSame(Weight::KG, $this->weight->unit());
+        static::assertSame(0, $this->weight->value());
+        static::assertSame(Weight::KG, $this->weight->unit());
     }
 
     /** @test */
@@ -81,8 +83,8 @@ class WeightTest extends TestCase
     {
         $units = Weight::units();
 
-        $this->assertCount(4, $units);
-        $this->assertSame([
+        static::assertCount(4, $units);
+        static::assertSame([
             Weight::TON,
             Weight::KG,
             Weight::G,
@@ -95,15 +97,15 @@ class WeightTest extends TestCase
     {
         $names = $this->weight->names();
 
-        $this->assertCount(4, $names);
+        static::assertCount(4, $names);
 
         foreach (Weight::units() as $unit) {
-            $this->assertArrayHasKey($unit, $names);
+            static::assertArrayHasKey($unit, $names);
 
             $name = $names[$unit];
 
-            $this->assertNotSame($unit, $name);
-            $this->assertSame($this->weight->getName($unit), $name);
+            static::assertNotSame($unit, $name);
+            static::assertSame($this->weight->getName($unit), $name);
         }
     }
 
@@ -113,8 +115,8 @@ class WeightTest extends TestCase
         $units = Weight::units();
 
         foreach ($this->weight->symbols() as $unit => $symbol) {
-            $this->assertTrue(in_array($unit, $units));
-            $this->assertSame($unit, $symbol);
+            static::assertTrue(in_array($unit, $units));
+            static::assertSame($unit, $symbol);
         }
     }
 
@@ -126,8 +128,8 @@ class WeightTest extends TestCase
         foreach ($values as $value) {
             $converted = Weight::make($value, Weight::KG)->to(Weight::G);
 
-            $this->assertSame(Weight::G,     $converted->unit());
-            $this->assertSame($value * 1000, $converted->value());
+            static::assertSame(Weight::G,     $converted->unit());
+            static::assertSame($value * 1000, $converted->value());
         }
     }
 
@@ -136,44 +138,44 @@ class WeightTest extends TestCase
     {
         $converted = $this->weight->setValue(1)->to($this->weight->unit());
 
-        $this->assertSame($this->weight->unit(),  $converted->unit());
-        $this->assertSame($this->weight->value(), $converted->value());
+        static::assertSame($this->weight->unit(),  $converted->unit());
+        static::assertSame($this->weight->value(), $converted->value());
     }
 
     /** @test */
     public function it_can_format()
     {
-        $this->assertSame('0', $this->weight->format());
+        static::assertSame('0', $this->weight->format());
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->weight->format());
-        $this->assertSame('1.234,567', $this->weight->format(3));
+        static::assertSame('1.235', $this->weight->format());
+        static::assertSame('1.234,567', $this->weight->format(3));
     }
 
     /** @test */
     public function it_can_format_with_symbol()
     {
-        $this->assertSame('0 kg', $this->weight->formatWithSymbol());
+        static::assertSame('0 kg', $this->weight->formatWithSymbol());
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235 kg',     $this->weight->formatWithSymbol());
-        $this->assertSame('1.234,567 kg', $this->weight->formatWithSymbol(3));
+        static::assertSame('1.235 kg',     $this->weight->formatWithSymbol());
+        static::assertSame('1.234,567 kg', $this->weight->formatWithSymbol(3));
     }
 
     /** @test */
     public function it_can_format_with_symbol_when_it_casts_to_string()
     {
-        $this->assertSame('0 kg', (string) $this->weight);
+        static::assertSame('0 kg', (string) $this->weight);
 
         $this->weight->setValue(1234.567);
 
-        $this->assertSame('1.235 kg', (string) $this->weight);
+        static::assertSame('1.235 kg', (string) $this->weight);
 
         $this->weight->setValue(-1234.567);
 
-        $this->assertSame('-1.235 kg', (string) $this->weight);
+        static::assertSame('-1.235 kg', (string) $this->weight);
     }
 
     /* -----------------------------------------------------------------
@@ -190,7 +192,7 @@ class WeightTest extends TestCase
             $this->weight->addWeight($value);
             $total += $value;
 
-            $this->assertSame($total, $this->weight->value());
+            static::assertSame($total, $this->weight->value());
         }
     }
 
@@ -199,7 +201,7 @@ class WeightTest extends TestCase
     {
         $this->weight->addWeight(-1);
 
-        $this->assertSame(-1, $this->weight->value());
+        static::assertSame(-1, $this->weight->value());
     }
 
     /** @test */
@@ -215,7 +217,7 @@ class WeightTest extends TestCase
 
             $total += $w->value();
 
-            $this->assertSame($total, $this->weight->value());
+            static::assertSame($total, $this->weight->value());
         }
     }
 
@@ -226,7 +228,7 @@ class WeightTest extends TestCase
 
         $this->weight->add($w);
 
-        $this->assertSame(1000, $this->weight->value());
+        static::assertSame(1000, $this->weight->value());
     }
 
     /** @test */
@@ -234,11 +236,11 @@ class WeightTest extends TestCase
     {
         $this->weight->subWeight(1);
 
-        $this->assertSame(-1, $this->weight->value());
+        static::assertSame(-1, $this->weight->value());
 
         $this->weight->subWeight(99);
 
-        $this->assertSame(-100, $this->weight->value());
+        static::assertSame(-100, $this->weight->value());
     }
 
     /** @test */
@@ -246,11 +248,11 @@ class WeightTest extends TestCase
     {
         $this->weight->subWeight(-1);
 
-        $this->assertSame(1, $this->weight->value());
+        static::assertSame(1, $this->weight->value());
 
         $this->weight->subWeight(-99);
 
-        $this->assertSame(100, $this->weight->value());
+        static::assertSame(100, $this->weight->value());
     }
 
     /** @test */
@@ -264,7 +266,7 @@ class WeightTest extends TestCase
         foreach ($values as $value) {
             $this->weight->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->weight->value());
+            static::assertSame($total, $this->weight->value());
         }
     }
 
@@ -279,7 +281,7 @@ class WeightTest extends TestCase
         foreach ($values as $value) {
             $this->weight->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->weight->value());
+            static::assertSame($total, $this->weight->value());
         }
     }
 
@@ -294,7 +296,7 @@ class WeightTest extends TestCase
         foreach ($values as $value) {
             $this->weight->divide($value);
             $total /= $value;
-            $this->assertSame($total, $this->weight->value());
+            static::assertSame($total, $this->weight->value());
         }
     }
 
@@ -316,7 +318,7 @@ class WeightTest extends TestCase
             $this->weight->divide(0);
         }
         catch (\Exception $e) {
-            $this->assertEquals('Division by zero', $e->getMessage());
+            static::assertEquals('Division by zero', $e->getMessage());
         }
     }
 }

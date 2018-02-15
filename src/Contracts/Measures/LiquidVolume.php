@@ -15,6 +15,7 @@ interface LiquidVolume extends UnitMeasure, Calculatable
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const KL  = 'kl';
     const HL  = 'hl';
     const DAL = 'dal';
@@ -24,9 +25,10 @@ interface LiquidVolume extends UnitMeasure, Calculatable
     const ML  = 'ml';
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a volume instance.
      *
@@ -64,6 +66,7 @@ interface LiquidVolume extends UnitMeasure, Calculatable
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the volume.
      *

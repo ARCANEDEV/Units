@@ -9,9 +9,10 @@
 interface UnitsManager
 {
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Create the distance unit instance.
      *

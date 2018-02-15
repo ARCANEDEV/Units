@@ -14,6 +14,7 @@ class UnitsServiceProvider extends PackageServiceProvider
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /**
      * Package name.
      *
@@ -32,6 +33,7 @@ class UnitsServiceProvider extends PackageServiceProvider
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the service provider.
      */
@@ -69,6 +71,7 @@ class UnitsServiceProvider extends PackageServiceProvider
      |  Other Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Register the Units Manager.
      */

@@ -12,6 +12,7 @@ interface FileSize
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const YB = 'YB';
     const ZB = 'ZB';
     const EB = 'EB';
@@ -26,6 +27,7 @@ interface FileSize
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a file size instance.
      *
@@ -41,6 +43,7 @@ interface FileSize
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the file size.
      *
