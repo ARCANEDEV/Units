@@ -15,6 +15,7 @@ class DistanceTest extends TestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\Contracts\Measures\Distance */
     private $distance;
 
@@ -22,6 +23,7 @@ class DistanceTest extends TestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -40,6 +42,7 @@ class DistanceTest extends TestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -50,13 +53,13 @@ class DistanceTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->distance);
+            static::assertInstanceOf($expected, $this->distance);
         }
 
-        $this->assertSame(0, $this->distance->value());
-        $this->assertSame(Distance::M, $this->distance->unit());
-        $this->assertSame('m', $this->distance->symbol());
-        $this->assertSame('metre', $this->distance->name());
+        static::assertSame(0, $this->distance->value());
+        static::assertSame(Distance::M, $this->distance->unit());
+        static::assertSame('m', $this->distance->symbol());
+        static::assertSame('metre', $this->distance->name());
     }
 
     /** @test */
@@ -70,11 +73,11 @@ class DistanceTest extends TestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->distance);
+            static::assertInstanceOf($expected, $this->distance);
         }
 
-        $this->assertSame(0, $this->distance->value());
-        $this->assertSame(Distance::M, $this->distance->unit());
+        static::assertSame(0, $this->distance->value());
+        static::assertSame(Distance::M, $this->distance->unit());
     }
 
     /** @test */
@@ -82,8 +85,8 @@ class DistanceTest extends TestCase
     {
         $units = Distance::units();
 
-        $this->assertCount(7, $units);
-        $this->assertSame([
+        static::assertCount(7, $units);
+        static::assertSame([
             Distance::KM,
             Distance::HM,
             Distance::DAM,
@@ -99,15 +102,15 @@ class DistanceTest extends TestCase
     {
         $names = $this->distance->names();
 
-        $this->assertCount(7, $names);
+        static::assertCount(7, $names);
 
         foreach (Distance::units() as $unit) {
-            $this->assertArrayHasKey($unit, $names);
+            static::assertArrayHasKey($unit, $names);
 
             $name = $names[$unit];
 
-            $this->assertNotSame($unit, $name);
-            $this->assertSame($this->distance->getName($unit), $name);
+            static::assertNotSame($unit, $name);
+            static::assertSame($this->distance->getName($unit), $name);
         }
     }
 
@@ -117,8 +120,8 @@ class DistanceTest extends TestCase
         $units = Distance::units();
 
         foreach ($this->distance->symbols() as $unit => $symbol) {
-            $this->assertTrue(in_array($unit, $units));
-            $this->assertSame($unit, $symbol);
+            static::assertTrue(in_array($unit, $units));
+            static::assertSame($unit, $symbol);
         }
     }
 
@@ -130,8 +133,8 @@ class DistanceTest extends TestCase
         foreach ($values as $value) {
             $converted = Distance::make($value, Distance::KM)->to(Distance::M);
 
-            $this->assertSame(Distance::M,   $converted->unit());
-            $this->assertSame($value * 1000, $converted->value());
+            static::assertSame(Distance::M,   $converted->unit());
+            static::assertSame($value * 1000, $converted->value());
         }
     }
 
@@ -140,53 +143,53 @@ class DistanceTest extends TestCase
     {
         $converted = $this->distance->setValue(1)->to($this->distance->unit());
 
-        $this->assertSame($this->distance->unit(),  $converted->unit());
-        $this->assertSame($this->distance->value(), $converted->value());
+        static::assertSame($this->distance->unit(),  $converted->unit());
+        static::assertSame($this->distance->value(), $converted->value());
     }
 
     /** @test */
     public function it_can_format()
     {
-        $this->assertSame('0', $this->distance->format());
+        static::assertSame('0', $this->distance->format());
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->distance->format());
-        $this->assertSame('1.234,567', $this->distance->format(3));
+        static::assertSame('1.235', $this->distance->format());
+        static::assertSame('1.234,567', $this->distance->format(3));
     }
 
     /** @test */
     public function it_can_format_with_symbol()
     {
-        $this->assertSame('0 m', $this->distance->formatWithSymbol());
+        static::assertSame('0 m', $this->distance->formatWithSymbol());
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235 m',     $this->distance->formatWithSymbol());
-        $this->assertSame('1.234,567 m', $this->distance->formatWithSymbol(3));
+        static::assertSame('1.235 m',     $this->distance->formatWithSymbol());
+        static::assertSame('1.234,567 m', $this->distance->formatWithSymbol(3));
 
         $this->distance = $this->distance->to(Distance::KM);
 
-        $this->assertSame('1 km',     $this->distance->formatWithSymbol());
-        $this->assertSame('1,235 km', $this->distance->formatWithSymbol(3));
+        static::assertSame('1 km',     $this->distance->formatWithSymbol());
+        static::assertSame('1,235 km', $this->distance->formatWithSymbol(3));
 
         $this->distance = $this->distance->to(Distance::MM);
 
-        $this->assertSame('1.234.567 mm', $this->distance->formatWithSymbol());
+        static::assertSame('1.234.567 mm', $this->distance->formatWithSymbol());
     }
 
     /** @test */
     public function it_can_format_with_symbol_when_it_casts_to_string()
     {
-        $this->assertSame('0 m', (string) $this->distance);
+        static::assertSame('0 m', (string) $this->distance);
 
         $this->distance->setValue(1234.567);
 
-        $this->assertSame('1.235 m', (string) $this->distance);
+        static::assertSame('1.235 m', (string) $this->distance);
 
         $this->distance = $this->distance->setValue(-1234.567);
 
-        $this->assertSame('-1.235 m', (string) $this->distance);
+        static::assertSame('-1.235 m', (string) $this->distance);
     }
 
     /* -----------------------------------------------------------------
@@ -203,7 +206,7 @@ class DistanceTest extends TestCase
             $this->distance->addDistance($value);
             $total += $value;
 
-            $this->assertSame($total, $this->distance->value());
+            static::assertSame($total, $this->distance->value());
         }
     }
 
@@ -212,7 +215,7 @@ class DistanceTest extends TestCase
     {
         $this->distance->addDistance(-1);
 
-        $this->assertSame(-1, $this->distance->value());
+        static::assertSame(-1, $this->distance->value());
     }
 
     /** @test */
@@ -228,7 +231,7 @@ class DistanceTest extends TestCase
 
             $total += $w->value();
 
-            $this->assertSame($total, $this->distance->value());
+            static::assertSame($total, $this->distance->value());
         }
     }
 
@@ -239,7 +242,7 @@ class DistanceTest extends TestCase
 
         $this->distance->add($dist);
 
-        $this->assertSame(1000, $this->distance->value());
+        static::assertSame(1000, $this->distance->value());
     }
 
     /** @test */
@@ -247,11 +250,11 @@ class DistanceTest extends TestCase
     {
         $this->distance->subDistance(1);
 
-        $this->assertSame(-1, $this->distance->value());
+        static::assertSame(-1, $this->distance->value());
 
         $this->distance->subDistance(99);
 
-        $this->assertSame(-100, $this->distance->value());
+        static::assertSame(-100, $this->distance->value());
     }
 
     /** @test */
@@ -259,11 +262,11 @@ class DistanceTest extends TestCase
     {
         $this->distance->subDistance(-1);
 
-        $this->assertSame(1, $this->distance->value());
+        static::assertSame(1, $this->distance->value());
 
         $this->distance->subDistance(-99);
 
-        $this->assertSame(100, $this->distance->value());
+        static::assertSame(100, $this->distance->value());
     }
 
     /** @test */
@@ -277,7 +280,7 @@ class DistanceTest extends TestCase
         foreach ($values as $value) {
             $this->distance->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->distance->value());
+            static::assertSame($total, $this->distance->value());
         }
     }
 
@@ -292,7 +295,7 @@ class DistanceTest extends TestCase
         foreach ($values as $value) {
             $this->distance->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->distance->value());
+            static::assertSame($total, $this->distance->value());
         }
     }
 
@@ -307,7 +310,7 @@ class DistanceTest extends TestCase
         foreach ($values as $value) {
             $this->distance->divide($value);
             $total /= $value;
-            $this->assertSame($total, $this->distance->value());
+            static::assertSame($total, $this->distance->value());
         }
     }
 
@@ -329,7 +332,7 @@ class DistanceTest extends TestCase
             $this->distance->divide(0);
         }
         catch (\Exception $e) {
-            $this->assertEquals('Division by zero', $e->getMessage());
+            static::assertEquals('Division by zero', $e->getMessage());
         }
     }
 }

@@ -14,6 +14,7 @@ interface Calculatable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the unit instance.
      *

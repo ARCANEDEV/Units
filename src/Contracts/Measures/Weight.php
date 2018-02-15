@@ -15,6 +15,7 @@ interface Weight extends UnitMeasure, Calculatable
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const TON = 't';
     const KG  = 'kg';
     const G   = 'g';
@@ -24,6 +25,7 @@ interface Weight extends UnitMeasure, Calculatable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a weight instance.
      *
@@ -61,6 +63,7 @@ interface Weight extends UnitMeasure, Calculatable
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the weight.
      *

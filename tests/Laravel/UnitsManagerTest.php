@@ -1,4 +1,5 @@
 <?php namespace Arcanedev\Units\Tests\Laravel;
+
 use Arcanedev\Units\Tests\LaravelTestCase;
 
 /**
@@ -13,6 +14,7 @@ class UnitsManagerTest extends LaravelTestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\UnitsManager */
     protected $manager;
 
@@ -20,6 +22,7 @@ class UnitsManagerTest extends LaravelTestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -38,6 +41,7 @@ class UnitsManagerTest extends LaravelTestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -48,7 +52,7 @@ class UnitsManagerTest extends LaravelTestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->manager);
+            static::assertInstanceOf($expected, $this->manager);
         }
     }
 
@@ -66,12 +70,12 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_instantiate_distance_unit()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Distance::class,
             $this->manager->driver('distance')
         );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Distance::class,
             $this->manager->distance()
         );
@@ -80,12 +84,12 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_instantiate_file_size_unit()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\FileSize::class,
             $this->manager->driver('file-size')
         );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\FileSize::class,
             $this->manager->fileSize()
         );
@@ -94,12 +98,12 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_instantiate_weight_unit()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Weight::class,
             $this->manager->driver('weight')
         );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Weight::class,
             $this->manager->weight()
         );
@@ -108,12 +112,12 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_instantiate_liquid_volume_unit()
     {
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\LiquidVolume::class,
             $this->manager->driver('liquid-volume')
         );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\LiquidVolume::class,
             $this->manager->liquidVolume()
         );
@@ -122,13 +126,12 @@ class UnitsManagerTest extends LaravelTestCase
     /** @test */
     public function it_can_be_instantiated_by_facade()
     {
-
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Distance::class,
             \Arcanedev\Units\Facades\Unit::driver('distance')
         );
 
-        $this->assertInstanceOf(
+        static::assertInstanceOf(
             \Arcanedev\Units\Measures\Distance::class,
             \Arcanedev\Units\Facades\Unit::distance()
         );

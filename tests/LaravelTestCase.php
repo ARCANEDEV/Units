@@ -14,6 +14,7 @@ abstract class LaravelTestCase extends BaseTestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();

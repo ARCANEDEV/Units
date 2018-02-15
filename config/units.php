@@ -6,10 +6,12 @@ use Arcanedev\Units\Contracts\Measures\LiquidVolume;
 use Arcanedev\Units\Contracts\Measures\Weight;
 
 return [
+
     /* -----------------------------------------------------------------
      |  Distance Unit
      | -----------------------------------------------------------------
      */
+
     'distance'      => [
         'default' => Distance::M,
         'symbols' => [
@@ -41,6 +43,7 @@ return [
      |  File Size Unit
      | -----------------------------------------------------------------
      */
+
     'file-size'     => [
         'default' => FileSize::B,
 
@@ -79,6 +82,7 @@ return [
      |  Liquid Volume Unit
      | -----------------------------------------------------------------
      */
+
     'liquid-volume' => [
         'default' => LiquidVolume::L,
 
@@ -113,6 +117,7 @@ return [
      |  Weight Unit
      | -----------------------------------------------------------------
      */
+
     'weight'        => [
         'default' => Weight::KG,
         'symbols' => [
@@ -133,4 +138,5 @@ return [
             'thousands-separator' => ' ',
         ],
     ],
+
 ];

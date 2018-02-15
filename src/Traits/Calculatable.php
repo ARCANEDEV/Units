@@ -14,6 +14,7 @@ trait Calculatable
      |  Getters & Setters
      | -----------------------------------------------------------------
      */
+
     /**
      * Get the unit value.
      *
@@ -38,9 +39,10 @@ trait Calculatable
     abstract public function unit();
 
     /* -----------------------------------------------------------------
-     |  Main Functions
+     |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the unit instance.
      *
@@ -112,7 +114,7 @@ trait Calculatable
      */
     protected static function calculate($a, $operator, $b)
     {
-        $operations = $operations = [
+        $operations = [
             '+' => function ($a, $b) { return $a + $b; },
             '-' => function ($a, $b) { return $a - $b; },
             'x' => function ($a, $b) { return $a * $b; },

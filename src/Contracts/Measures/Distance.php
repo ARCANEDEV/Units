@@ -15,6 +15,7 @@ interface Distance extends UnitMeasure, Calculatable
      |  Constants
      | -----------------------------------------------------------------
      */
+
     const KM  = 'km';
     const HM  = 'hm';
     const DAM = 'dam';
@@ -27,6 +28,7 @@ interface Distance extends UnitMeasure, Calculatable
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Make a distance instance.
      *
@@ -75,6 +77,7 @@ interface Distance extends UnitMeasure, Calculatable
      |  Calculation Methods
      | -----------------------------------------------------------------
      */
+
     /**
      * Add the distance.
      *

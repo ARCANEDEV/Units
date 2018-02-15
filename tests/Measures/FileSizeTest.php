@@ -15,6 +15,7 @@ class FileSizeTest extends LaravelTestCase
      |  Properties
      | -----------------------------------------------------------------
      */
+
     /** @var  \Arcanedev\Units\Measures\FileSize */
     protected $fileSize;
 
@@ -22,6 +23,7 @@ class FileSizeTest extends LaravelTestCase
      |  Main Methods
      | -----------------------------------------------------------------
      */
+
     public function setUp()
     {
         parent::setUp();
@@ -40,6 +42,7 @@ class FileSizeTest extends LaravelTestCase
      |  Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_be_instantiated()
     {
@@ -50,13 +53,13 @@ class FileSizeTest extends LaravelTestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->fileSize);
+            static::assertInstanceOf($expected, $this->fileSize);
         }
 
-        $this->assertSame(0, $this->fileSize->value());
-        $this->assertSame(FileSize::B, $this->fileSize->unit());
-        $this->assertSame('B', $this->fileSize->symbol());
-        $this->assertSame('byte', $this->fileSize->name());
+        static::assertSame(0, $this->fileSize->value());
+        static::assertSame(FileSize::B, $this->fileSize->unit());
+        static::assertSame('B', $this->fileSize->symbol());
+        static::assertSame('byte', $this->fileSize->name());
     }
 
     /** @test */
@@ -70,11 +73,11 @@ class FileSizeTest extends LaravelTestCase
         ];
 
         foreach ($expectations as $expected) {
-            $this->assertInstanceOf($expected, $this->fileSize);
+            static::assertInstanceOf($expected, $this->fileSize);
         }
 
-        $this->assertSame(0, $this->fileSize->value());
-        $this->assertSame(FileSize::B, $this->fileSize->unit());
+        static::assertSame(0, $this->fileSize->value());
+        static::assertSame(FileSize::B, $this->fileSize->unit());
     }
 
     /** @test */
@@ -82,8 +85,8 @@ class FileSizeTest extends LaravelTestCase
     {
         $units = FileSize::units();
 
-        $this->assertCount(9, $units);
-        $this->assertSame([
+        static::assertCount(9, $units);
+        static::assertSame([
             FileSize::YB,
             FileSize::ZB,
             FileSize::EB,
@@ -101,15 +104,15 @@ class FileSizeTest extends LaravelTestCase
     {
         $names = $this->fileSize->names();
 
-        $this->assertCount(9, $names);
+        static::assertCount(9, $names);
 
         foreach (FileSize::units() as $unit) {
-            $this->assertArrayHasKey($unit, $names);
+            static::assertArrayHasKey($unit, $names);
 
             $name = $names[$unit];
 
-            $this->assertNotSame($unit, $name);
-            $this->assertSame($this->fileSize->getName($unit), $name);
+            static::assertNotSame($unit, $name);
+            static::assertSame($this->fileSize->getName($unit), $name);
         }
     }
 
@@ -119,8 +122,8 @@ class FileSizeTest extends LaravelTestCase
         $units = FileSize::units();
 
         foreach ($this->fileSize->symbols() as $unit => $symbol) {
-            $this->assertTrue(in_array($unit, $units));
-            $this->assertSame($unit, $symbol);
+            static::assertTrue(in_array($unit, $units));
+            static::assertSame($unit, $symbol);
         }
     }
 
@@ -132,8 +135,8 @@ class FileSizeTest extends LaravelTestCase
         foreach ($values as $value) {
             $converted = FileSize::make($value, FileSize::KB)->to(FileSize::B);
 
-            $this->assertSame(FileSize::B,   $converted->unit());
-            $this->assertEquals($value * 1024, $converted->value());
+            static::assertSame(FileSize::B,   $converted->unit());
+            static::assertEquals($value * 1024, $converted->value());
         }
     }
 
@@ -142,59 +145,60 @@ class FileSizeTest extends LaravelTestCase
     {
         $converted = $this->fileSize->setValue(1)->to($this->fileSize->unit());
 
-        $this->assertSame($this->fileSize->unit(),  $converted->unit());
-        $this->assertSame($this->fileSize->value(), $converted->value());
+        static::assertSame($this->fileSize->unit(),  $converted->unit());
+        static::assertSame($this->fileSize->value(), $converted->value());
     }
 
     /** @test */
     public function it_can_format()
     {
-        $this->assertSame('0', $this->fileSize->format());
+        static::assertSame('0', $this->fileSize->format());
 
         $this->fileSize->setValue(1234.567);
 
-        $this->assertSame('1.235', $this->fileSize->format());
-        $this->assertSame('1.234,567', $this->fileSize->format(3));
+        static::assertSame('1.235', $this->fileSize->format());
+        static::assertSame('1.234,567', $this->fileSize->format(3));
     }
 
     /** @test */
     public function it_can_format_with_symbol()
     {
-        $this->assertSame('0 B', $this->fileSize->formatWithSymbol());
+        static::assertSame('0 B', $this->fileSize->formatWithSymbol());
 
         $this->fileSize->setValue(1234.567);
 
-        $this->assertSame('1.235 B',     $this->fileSize->formatWithSymbol());
-        $this->assertSame('1.234,567 B', $this->fileSize->formatWithSymbol(3));
+        static::assertSame('1.235 B',     $this->fileSize->formatWithSymbol());
+        static::assertSame('1.234,567 B', $this->fileSize->formatWithSymbol(3));
 
         $this->fileSize = $this->fileSize->to(FileSize::KB);
 
-        $this->assertSame('1 kB',     $this->fileSize->formatWithSymbol());
-        $this->assertSame('1,206 kB', $this->fileSize->formatWithSymbol(3));
+        static::assertSame('1 kB',     $this->fileSize->formatWithSymbol());
+        static::assertSame('1,206 kB', $this->fileSize->formatWithSymbol(3));
 
         $this->fileSize = $this->fileSize->to(FileSize::B);
 
-        $this->assertSame('1.235 B', $this->fileSize->formatWithSymbol());
+        static::assertSame('1.235 B', $this->fileSize->formatWithSymbol());
     }
 
     /** @test */
     public function it_can_format_with_symbol_when_it_casts_to_string()
     {
-        $this->assertSame('0 B', (string) $this->fileSize);
+        static::assertSame('0 B', (string) $this->fileSize);
 
         $this->fileSize->setValue(1234.567);
 
-        $this->assertSame('1.235 B', (string) $this->fileSize);
+        static::assertSame('1.235 B', (string) $this->fileSize);
 
         $this->fileSize = $this->fileSize->setValue(-1234.567);
 
-        $this->assertSame('-1.235 B', (string) $this->fileSize);
+        static::assertSame('-1.235 B', (string) $this->fileSize);
     }
 
     /* -----------------------------------------------------------------
      |  Calculation Tests
      | -----------------------------------------------------------------
      */
+
     /** @test */
     public function it_can_add()
     {
@@ -205,7 +209,7 @@ class FileSizeTest extends LaravelTestCase
             $this->fileSize->addSize($value);
             $total += $value;
 
-            $this->assertSame($total, $this->fileSize->value());
+            static::assertSame($total, $this->fileSize->value());
         }
     }
 
@@ -214,7 +218,7 @@ class FileSizeTest extends LaravelTestCase
     {
         $this->fileSize->addSize(-1);
 
-        $this->assertSame(-1, $this->fileSize->value());
+        static::assertSame(-1, $this->fileSize->value());
     }
 
     /** @test */
@@ -230,7 +234,7 @@ class FileSizeTest extends LaravelTestCase
 
             $total += $s->value();
 
-            $this->assertSame($total, $this->fileSize->value());
+            static::assertSame($total, $this->fileSize->value());
         }
     }
 
@@ -241,7 +245,7 @@ class FileSizeTest extends LaravelTestCase
 
         $this->fileSize->add($size);
 
-        $this->assertSame(1024.0, $this->fileSize->value());
+        static::assertSame(1024.0, $this->fileSize->value());
     }
 
     /** @test */
@@ -249,11 +253,11 @@ class FileSizeTest extends LaravelTestCase
     {
         $this->fileSize->subSize(1);
 
-        $this->assertSame(-1, $this->fileSize->value());
+        static::assertSame(-1, $this->fileSize->value());
 
         $this->fileSize->subSize(99);
 
-        $this->assertSame(-100, $this->fileSize->value());
+        static::assertSame(-100, $this->fileSize->value());
     }
 
     /** @test */
@@ -261,11 +265,11 @@ class FileSizeTest extends LaravelTestCase
     {
         $this->fileSize->subSize(-1);
 
-        $this->assertSame(1, $this->fileSize->value());
+        static::assertSame(1, $this->fileSize->value());
 
         $this->fileSize->subSize(-99);
 
-        $this->assertSame(100, $this->fileSize->value());
+        static::assertSame(100, $this->fileSize->value());
     }
 
     /** @test */
@@ -279,7 +283,7 @@ class FileSizeTest extends LaravelTestCase
         foreach ($values as $value) {
             $this->fileSize->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->fileSize->value());
+            static::assertSame($total, $this->fileSize->value());
         }
     }
 
@@ -294,7 +298,7 @@ class FileSizeTest extends LaravelTestCase
         foreach ($values as $value) {
             $this->fileSize->multiply($value);
             $total *= $value;
-            $this->assertSame($total, $this->fileSize->value());
+            static::assertSame($total, $this->fileSize->value());
         }
     }
 
@@ -309,7 +313,7 @@ class FileSizeTest extends LaravelTestCase
         foreach ($values as $value) {
             $this->fileSize->divide($value);
             $total /= $value;
-            $this->assertSame($total, $this->fileSize->value());
+            static::assertSame($total, $this->fileSize->value());
         }
     }
 
@@ -331,7 +335,7 @@ class FileSizeTest extends LaravelTestCase
             $this->fileSize->divide(0);
         }
         catch (\Exception $e) {
-            $this->assertEquals('Division by zero', $e->getMessage());
+            static::assertEquals('Division by zero', $e->getMessage());
         }
     }
 }
